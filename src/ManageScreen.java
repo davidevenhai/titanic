@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class ManageScreen extends JPanel {
     private JComboBox<String> survivedComboBox;
+    private JComboBox<String> survivedComboBoxSex;
     public ArrayList<Passenger> passengers = new ArrayList<Passenger>();
     public ArrayList<String> values;
 
@@ -55,8 +56,19 @@ public class ManageScreen extends JPanel {
             this.survivedComboBox.setBounds(survivedLabel.getX() +Constants.LABEL_WIDTH, survivedLabel.getY(), Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
             this.add(this.survivedComboBox);
             this.survivedComboBox.addActionListener((e) -> {
-                //do whatever you want on change
+
             });
+
+            JLabel survivedLabelSex = new JLabel("Sex: ");
+            survivedLabelSex.setBounds(survivedComboBox.getX()+Constants.COMBO_BOX_WIDTH+Constants.SPACE_BETWEEN, y, Constants.LABEL_WIDTH/2, Constants.LABEL_HEIGHT);
+            this.add(survivedLabelSex);
+            this.survivedComboBoxSex = new JComboBox<>(Constants.SEX_TYPE);
+            this.survivedComboBoxSex.setBounds(survivedLabelSex.getX() + Constants.COMBO_BOX_WIDTH/2, y, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
+            this.add(this.survivedComboBoxSex);
+            this.survivedComboBoxSex.addActionListener((e) -> {
+
+            });
+
         }
 
     }
