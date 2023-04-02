@@ -48,16 +48,11 @@ public class ManageScreen extends JPanel {
             this.setLayout(null);
             this.setBounds(x, y + Constants.MARGIN_FROM_TOP, width, height);
             JLabel survivedLabel = new JLabel("Passenger Class: ");
-            survivedLabel.setBounds(x + Constants.MARGIN_FROM_LEFT, y, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
+            survivedLabel.setBounds(x , y, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
             this.add(survivedLabel);
-            JLabel passengerLabel = new JLabel("Passenger Name:");
-            passengerLabel.setBounds(x + Constants.MARGIN_FROM_LEFT * 2, y + 35, Constants.LABEL_WIDTH * 2, Constants.LABEL_HEIGHT);
-            this.add(passengerLabel);
-            TextField passengerName = new TextField("");
-            passengerName.setBounds(x + Constants.MARGIN_FROM_LEFT * 2, y + 70, Constants.LABEL_WIDTH * 2, Constants.LABEL_HEIGHT);
-            this.add(passengerName);
+
             this.survivedComboBox = new JComboBox<>(Constants.PASSENGER_CLASS_OPTIONS);
-            this.survivedComboBox.setBounds(survivedLabel.getX() + survivedLabel.getWidth() + 1, survivedLabel.getY(), Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
+            this.survivedComboBox.setBounds(survivedLabel.getX() +Constants.LABEL_WIDTH, survivedLabel.getY(), Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
             this.add(this.survivedComboBox);
             this.survivedComboBox.addActionListener((e) -> {
                 //do whatever you want on change
@@ -65,5 +60,7 @@ public class ManageScreen extends JPanel {
         }
 
     }
-
+    //TextField passengerName = new TextField("");
+    //            passengerName.setBounds(x + Constants.MARGIN_FROM_LEFT * 2, y + 70, Constants.LABEL_WIDTH * 2, Constants.LABEL_HEIGHT);
+    //            this.add(passengerName); מיועד לאביחי, זה הטקסט שמעל הלוח בחירה שלו
 }
