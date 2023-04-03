@@ -178,13 +178,14 @@ public class ManageScreen extends JPanel {
             this.add(cabinNumberBox);
 
             //Filter button - הכפתור הכי חשוב, שיהיה בצורה יפה במרכז
-            JLabel filter = new JLabel("Filter");
-            filter.setBounds(x + Constants.MARGIN_FROM_LEFT+350, 400, Constants.LABEL_WIDTH / 2+50, Constants.LABEL_HEIGHT);
+            JButton filter = new JButton("Filter");
+            filter.setBounds(x + Constants.MARGIN_FROM_LEFT+300, 550, Constants.LABEL_WIDTH / 2+50, Constants.LABEL_HEIGHT+20);
+            filter.setFont(new Font("Filter",Font.ROMAN_BASELINE,20));
             this.add(filter);
 
-            TextField filterBox = new TextField("");
-            filterBox.setBounds(x + Constants.MARGIN_FROM_LEFT+350, 450, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
-            this.add(filterBox);
+//            TextField filterBox = new TextField("");
+//            filterBox.setBounds(x + Constants.MARGIN_FROM_LEFT+350, 450, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+//            this.add(filterBox);
 
 
         }
