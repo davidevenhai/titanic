@@ -76,7 +76,7 @@ public class ManageScreen extends JPanel {
             JLabel embarkedLabel = new JLabel("Went on deck:");
             embarkedLabel.setBounds(survivedLabelSex.getX() + Constants.SPACE_BETWEEN * 2 + Constants.SPACE_BETWEEN / 2, y, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
             this.add(embarkedLabel);
-            this.survivedComboBoxEmbarked = new JComboBox<>(Constants.SEX_TYPE);
+            this.survivedComboBoxEmbarked = new JComboBox<>(Constants.EMBARKED);
             this.survivedComboBoxEmbarked.setBounds(embarkedLabel.getX() + Constants.SPACE_BETWEEN + Constants.SPACE_BETWEEN / 2, y, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
             this.add(this.survivedComboBoxEmbarked);
             this.survivedComboBoxEmbarked.addActionListener((e) -> {
