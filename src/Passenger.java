@@ -19,7 +19,11 @@ public class Passenger {
         this.id = id;
         this.survived = survived;
         this.pClass = pClass;
-        this.name = name;
+        if (name != null) {
+            this.name = getFormattedName(name);
+        } else {
+            this.name = "";
+        }
         this.sex = sex;
         if (age.equals("")) {
             this.age = 0;
@@ -31,17 +35,24 @@ public class Passenger {
         this.ticket = ticket;
         this.fare = fare;
         this.cabin = cabin;
-        if(embarked == null){
+        if (embarked == null) {
             this.embarked = "X";
-        }else{
+        } else {
             this.embarked = embarked;
         }
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String getFormattedName(String name) {
-        String lastName = this.name.substring(0, this.name.indexOf(","));
-        String firstName = this.name.substring(this.name.indexOf(".") + 2);
-        String formattedName = firstName + " " + lastName;
+        String formattedName = "";
+        if (name != null) {
+            String lastName = name.substring(1, name.indexOf(", "));
+            String firstName = name.substring(name.indexOf(". ") + 2, name.length() - 1);
+            formattedName = firstName + " " + lastName;
+        }
         return formattedName;
     }
 
