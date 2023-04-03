@@ -47,7 +47,7 @@ public class ManageScreen extends JPanel {
     public ManageScreen(int x, int y, int width, int height) {
 
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
-        backGround=new ImageIcon("C:\\Users\\עומר\\Downloads\\תמונה טיטאניק.jpg").getImage();
+        backGround=new ImageIcon("titanicphoto.jpg").getImage();
 
         if (file.exists()) {
             ReadData(file);
@@ -83,17 +83,19 @@ public class ManageScreen extends JPanel {
 
             });
             JLabel ageMin = new JLabel("Min age");
-//            ageMin.setFont(new Font("Min age",20,Font.BOLD));
-            ageMin.setBounds(x + Constants.MARGIN_FROM_LEFT, 160, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            ageMin.setBounds(x + Constants.MARGIN_FROM_LEFT+700, 500, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(ageMin);
+
             TextField minAge = new TextField("");
-            minAge.setBounds(x + Constants.MARGIN_FROM_LEFT, 200, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            minAge.setBounds(x + Constants.MARGIN_FROM_LEFT+700, 550, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(minAge);
+
             JLabel ageMax = new JLabel("Max age");
-            ageMax.setBounds(x + Constants.MARGIN_FROM_LEFT+100, 160, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            ageMax.setBounds(x + Constants.MARGIN_FROM_LEFT+700, 160, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(ageMax);
+
             TextField maxAge = new TextField("");
-            maxAge.setBounds(x + ageMax.getX(), 200, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            maxAge.setBounds(x + Constants.MARGIN_FROM_LEFT+700, 200, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(maxAge);
 
         }

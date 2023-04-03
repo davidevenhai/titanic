@@ -1,6 +1,6 @@
 public class Constants {
     public static final String PATH_TO_DATA_FILE = "src/data/titanic.csv";
-    public static final int WINDOW_WIDTH = 600;
+    public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 700;
     public static final String[] PASSENGER_CLASS_OPTIONS = { "All", "1st", "2nd", "3rd"};
     public static final String[] SEX_TYPE = { "All", "Male", "Female"};
