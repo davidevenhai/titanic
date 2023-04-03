@@ -47,7 +47,7 @@ public class ManageScreen extends JPanel {
     public ManageScreen(int x, int y, int width, int height) {
 
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
-        backGround=new ImageIcon("titanicphoto.jpg").getImage();
+        backGround=new ImageIcon("C:\\Users\\עומר\\Downloads\\תמונה טיטאניק.jpg").getImage();
 
         if (file.exists()) {
             ReadData(file);
