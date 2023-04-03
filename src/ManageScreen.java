@@ -10,7 +10,10 @@ public class ManageScreen extends JPanel {
     private JComboBox<String> survivedComboBoxSex;
     private JComboBox<String> survivedComboBoxEmbarked;
     public ArrayList<Passenger> passengers = new ArrayList<Passenger>();
+
     public ArrayList<String> values;
+
+    private Image backGround;
 
     public void ReadData(File file) {
         String data;
@@ -43,8 +46,8 @@ public class ManageScreen extends JPanel {
 
     public ManageScreen(int x, int y, int width, int height) {
 
-
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
+        backGround=new ImageIcon("C:\\Users\\עומר\\Downloads\\תמונה טיטאניק.jpg").getImage();
 
         if (file.exists()) {
             ReadData(file);
@@ -80,19 +83,26 @@ public class ManageScreen extends JPanel {
 
             });
             JLabel ageMin = new JLabel("Min age");
+//            ageMin.setFont(new Font("Min age",20,Font.BOLD));
             ageMin.setBounds(x + Constants.MARGIN_FROM_LEFT, 160, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(ageMin);
             TextField minAge = new TextField("");
             minAge.setBounds(x + Constants.MARGIN_FROM_LEFT, 200, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(minAge);
             JLabel ageMax = new JLabel("Max age");
-            ageMax.setBounds(x + Constants.MARGIN_FROM_LEFT, 160, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            ageMax.setBounds(x + Constants.MARGIN_FROM_LEFT+100, 160, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(ageMax);
             TextField maxAge = new TextField("");
             maxAge.setBounds(x + ageMax.getX(), 200, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(maxAge);
 
         }
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponents(g);
+        g.drawImage(backGround,0,0,null);
     }
 }
 //TextField passengerName = new TextField("");
