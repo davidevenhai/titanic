@@ -83,18 +83,110 @@ public class ManageScreen extends JPanel {
 
             });
             JLabel ageMin = new JLabel("Min age");
-//            ageMin.setFont(new Font("Min age",20,Font.BOLD));
-            ageMin.setBounds(x + Constants.MARGIN_FROM_LEFT, 160, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            ageMin.setBounds(x + Constants.MARGIN_FROM_LEFT+700, 500, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(ageMin);
+
             TextField minAge = new TextField("");
-            minAge.setBounds(x + Constants.MARGIN_FROM_LEFT, 200, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            minAge.setBounds(x + Constants.MARGIN_FROM_LEFT+700, 550, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(minAge);
+
             JLabel ageMax = new JLabel("Max age");
-            ageMax.setBounds(x + Constants.MARGIN_FROM_LEFT+100, 160, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            ageMax.setBounds(x + Constants.MARGIN_FROM_LEFT+700, 160, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(ageMax);
+
             TextField maxAge = new TextField("");
-            maxAge.setBounds(x + ageMax.getX(), 200, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            maxAge.setBounds(x + Constants.MARGIN_FROM_LEFT+700, 200, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(maxAge);
+
+            //Min-Max passenger labels/Text Field.
+            JLabel minPassengerNumber = new JLabel("Min Passenger Number");
+            minPassengerNumber.setBounds(x + Constants.MARGIN_FROM_LEFT+450, 160, Constants.LABEL_WIDTH / 2+90, Constants.LABEL_HEIGHT);
+            this.add(minPassengerNumber);
+
+            TextField PassengerNumberMin = new TextField("");
+            PassengerNumberMin.setBounds(x + Constants.MARGIN_FROM_LEFT+450, 200, Constants.LABEL_WIDTH / 2+50, Constants.LABEL_HEIGHT);
+            this.add(PassengerNumberMin);
+
+            JLabel maxPassengerNumber = new JLabel("Max Passenger Number");
+            maxPassengerNumber.setBounds(x + Constants.MARGIN_FROM_LEFT+200, 160, Constants.LABEL_WIDTH / 2+90, Constants.LABEL_HEIGHT);
+            this.add(maxPassengerNumber);
+
+            TextField PassengerNumberMax = new TextField("");
+            PassengerNumberMax.setBounds(x + Constants.MARGIN_FROM_LEFT+200, 200, Constants.LABEL_WIDTH / 2+50, Constants.LABEL_HEIGHT);
+            this.add(PassengerNumberMax);
+
+            //Passenger name;
+            JLabel passengerName = new JLabel("Passenger name");
+            passengerName.setBounds(x + Constants.MARGIN_FROM_LEFT, 160, Constants.LABEL_WIDTH / 2+50, Constants.LABEL_HEIGHT);
+            this.add(passengerName);
+
+            TextField enterPassengerName = new TextField("");
+            enterPassengerName.setBounds(x + Constants.MARGIN_FROM_LEFT, 200, Constants.LABEL_WIDTH / 2+50, Constants.LABEL_HEIGHT);
+            this.add(enterPassengerName);
+
+            //Search by number of brothers (SibSP), need to let him enter numbers between 1-9
+            JLabel sibSPAmount = new JLabel("Sibilings/Spouse");
+            sibSPAmount.setBounds(x + Constants.MARGIN_FROM_LEFT, 500, Constants.LABEL_WIDTH / 2+50, Constants.LABEL_HEIGHT);
+            this.add(sibSPAmount);
+
+            TextField sibSPAmountBox = new TextField("");
+            sibSPAmountBox.setBounds(x + Constants.MARGIN_FROM_LEFT, 550, Constants.LABEL_WIDTH / 2+50, Constants.LABEL_HEIGHT);
+            this.add(sibSPAmountBox);
+
+            //Search by number of parents/childrens (Parch)
+            JLabel parchAmount = new JLabel("Parch");
+            parchAmount.setBounds(x + Constants.MARGIN_FROM_LEFT, 400, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            this.add(parchAmount);
+
+            TextField parchAmountBox = new TextField("");
+            parchAmountBox.setBounds(x + Constants.MARGIN_FROM_LEFT, 450, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            this.add(parchAmountBox);
+
+            //Search by Ticket Number (שי רצה לפי מספר אבל בפועל זה סטרינג בקובץ אקסל)
+            JLabel ticketNumber = new JLabel("Ticket Number");
+            ticketNumber.setBounds(x + Constants.MARGIN_FROM_LEFT, 300, Constants.LABEL_WIDTH / 2+50, Constants.LABEL_HEIGHT);
+            this.add(ticketNumber);
+
+            TextField ticketNumberBox = new TextField("");
+            ticketNumberBox.setBounds(x + Constants.MARGIN_FROM_LEFT, 350, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            this.add(ticketNumberBox);
+
+            //Min-Max ticket price labels/Text Field.
+            JLabel minTicketLabel = new JLabel("Min Price");
+            minTicketLabel.setBounds(x + Constants.MARGIN_FROM_LEFT+700, 300, Constants.LABEL_WIDTH / 2+90, Constants.LABEL_HEIGHT);
+            this.add(minTicketLabel);
+
+            TextField minTicketPrice = new TextField("");
+            minTicketPrice.setBounds(x + Constants.MARGIN_FROM_LEFT+700, 350, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            this.add(minTicketPrice);
+
+            JLabel maxPriceLabel = new JLabel("Max Price");
+            maxPriceLabel.setBounds(x + Constants.MARGIN_FROM_LEFT+700, 400, Constants.LABEL_WIDTH / 2+90, Constants.LABEL_HEIGHT);
+            this.add(maxPriceLabel);
+
+            TextField maxTicketPrice = new TextField("");
+            maxTicketPrice.setBounds(x + Constants.MARGIN_FROM_LEFT+700, 450, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            this.add(maxTicketPrice);
+
+            //Search by Cabin Number (שי רצה לפי מספר אבל בפועל זה סטרינג בקובץ אקסל)
+            JLabel cabinNumber = new JLabel("Cabin");
+            cabinNumber.setBounds(x + Constants.MARGIN_FROM_LEFT+600, y, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            this.add(cabinNumber);
+
+            TextField cabinNumberBox = new TextField("");
+            cabinNumberBox.setBounds(x + Constants.MARGIN_FROM_LEFT+650, y, Constants.LABEL_WIDTH / 2+50, Constants.LABEL_HEIGHT);
+            this.add(cabinNumberBox);
+
+            //Filter button - הכפתור הכי חשוב, שיהיה בצורה יפה במרכז
+            JButton filter = new JButton("Filter");
+            filter.setBounds(x + Constants.MARGIN_FROM_LEFT+300, 550, Constants.LABEL_WIDTH / 2+50, Constants.LABEL_HEIGHT+20);
+            filter.setFont(new Font("Filter",Font.ROMAN_BASELINE,20));
+            this.add(filter);
+
+//            TextField filterBox = new TextField("");
+//            filterBox.setBounds(x + Constants.MARGIN_FROM_LEFT+350, 450, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+//            this.add(filterBox);
+
 
         }
     }
