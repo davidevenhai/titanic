@@ -1,11 +1,9 @@
-import java.util.ArrayList;
-
 public class Passenger {
     private int id;
     private int survived;
     private int pClass;
     private String name;
-    private String sex;
+    private String gender;
     private float age;
     private int sibSp;
     private int parch;
@@ -14,7 +12,7 @@ public class Passenger {
     private String cabin;
     private String embarked;
 
-    public Passenger(int id, int survived, int pClass, String name, String sex, String age, int sibSp, int parch,
+    public Passenger(int id, int survived, int pClass, String name, String gender, String age, int sibSp, int parch,
                      String ticket, double fare, String cabin, String embarked) {
         this.id = id;
         this.survived = survived;
@@ -24,7 +22,7 @@ public class Passenger {
         } else {
             this.name = "";
         }
-        this.sex = sex;
+        this.gender = gender;
         if (age.equals("")) {
             this.age = 0;
         } else {
@@ -56,4 +54,47 @@ public class Passenger {
         return formattedName;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public int getSurvived() {
+        return survived;
+    }
+
+    public int getpClass() {
+        return pClass;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public float getAge() {
+        return age;
+    }
+
+    public int getSibSp() {
+        return sibSp;
+    }
+
+    public int getParch() {
+        return parch;
+    }
+
+    public String getTicket() {
+        return ticket;
+    }
+
+    public double getFare() {
+        return fare;
+    }
+
+    public String getCabin() {
+        return cabin;
+    }
+
+    public String getEmbarked() {
+        return embarked;
+    }
 }

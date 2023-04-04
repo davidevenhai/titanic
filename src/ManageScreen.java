@@ -2,19 +2,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ContainerAdapter;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 
 public class ManageScreen extends JPanel implements ActionListener {
     private JComboBox<String> survivedComboBox;
-    private JComboBox<String> survivedComboBoxSex;
+    private JComboBox<String> survivedComboBoxGender;
     private JComboBox<String> survivedComboBoxEmbarked;
     public ArrayList<Passenger> passengers = new ArrayList<Passenger>();
 
     public ArrayList<String> values;
+    private String cabinNumberData = "";
+    private String genderData="";
+    private int classNumber;
+    private String wentOnDeckData;
+    private Integer passengerNumberMinData;
+    private Integer passengerNumberMaxData;
+    private String passengerNameData;
+    private Integer sibSPAmountData;
+    private Integer parchAmountData;
+    private String ticketNumberData;
+    private Float minTicketPriceData;
+    private Float maxTicketPriceData;
+
 
     private Image backGround;
 
@@ -44,6 +54,7 @@ public class ManageScreen extends JPanel implements ActionListener {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
 
@@ -60,29 +71,39 @@ public class ManageScreen extends JPanel implements ActionListener {
             survivedLabel.setBounds(x, y, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
             this.add(survivedLabel);
 
-            this.survivedComboBox = new JComboBox<>(Constants.PASSENGER_CLASS_OPTIONS);
-            this.survivedComboBox.setBounds(survivedLabel.getX() + Constants.LABEL_WIDTH, survivedLabel.getY(), Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
-            this.add(this.survivedComboBox);
-            this.survivedComboBox.addActionListener((e) -> {
+            this.survivedComboBoxGender = new JComboBox<>(Constants.PASSENGER_CLASS_OPTIONS);
+            this.survivedComboBoxGender.setBounds(survivedLabel.getX() + Constants.LABEL_WIDTH, survivedLabel.getY(), Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
+            this.add(this.survivedComboBoxGender);
+            this.survivedComboBoxGender.addActionListener((e) -> {
                 String classData = Constants.PASSENGER_CLASS_OPTIONS[0];
-                classData = this.survivedComboBox.getItemAt(this.survivedComboBox.getSelectedIndex());
+                classData = this.survivedComboBoxGender.getItemAt(this.survivedComboBoxGender.getSelectedIndex());
+                int classNumber = 0;
+                if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[1])) {
+                    classNumber = 1;
+                } else if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[2])) {
+                    classNumber = 2;
+                } else if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[3])) {
+                    classNumber = 3;
+                } else{
+                    classData.equals(Constants.PASSENGER_CLASS_OPTIONS[0]);
+                }
                 System.out.println((classData));
             });
 
-            JLabel survivedLabelSex = new JLabel("Gender: ");
-            survivedLabelSex.setBounds(survivedComboBox.getX() + Constants.COMBO_BOX_WIDTH + Constants.SPACE_BETWEEN / 4, y, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
-            this.add(survivedLabelSex);
-            this.survivedComboBoxSex = new JComboBox<>(Constants.SEX_TYPE);
-            this.survivedComboBoxSex.setBounds(survivedLabelSex.getX() + Constants.COMBO_BOX_WIDTH, y, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
-            this.add(this.survivedComboBoxSex);
-            this.survivedComboBoxSex.addActionListener((e) -> {
-                String genderData = Constants.SEX_TYPE[0];
-                genderData = this.survivedComboBoxSex.getItemAt(this.survivedComboBoxSex.getSelectedIndex());
+            JLabel survivedLabelGender = new JLabel("Gender: ");
+            survivedLabelGender.setBounds(survivedComboBoxGender.getX() + Constants.COMBO_BOX_WIDTH + Constants.SPACE_BETWEEN / 4, y, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            this.add(survivedLabelGender);
+            this.survivedComboBoxGender = new JComboBox<>(Constants.GENDER_TYPE);
+            this.survivedComboBoxGender.setBounds(survivedLabelGender.getX() + Constants.COMBO_BOX_WIDTH, y, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
+            this.add(this.survivedComboBoxGender);
+            this.survivedComboBoxGender.addActionListener((e) -> {
+                String genderData = Constants.GENDER_TYPE[0];
+                genderData = this.survivedComboBoxGender.getItemAt(this.survivedComboBoxGender.getSelectedIndex());
                 System.out.println(genderData);
 
             });
             JLabel embarkedLabel = new JLabel("Went on deck:");
-            embarkedLabel.setBounds(survivedLabelSex.getX() + Constants.SPACE_BETWEEN * 2 + Constants.SPACE_BETWEEN / 2, y, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
+            embarkedLabel.setBounds(survivedLabelGender.getX() + Constants.SPACE_BETWEEN * 2 + Constants.SPACE_BETWEEN / 2, y, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
             this.add(embarkedLabel);
             this.survivedComboBoxEmbarked = new JComboBox<>(Constants.EMBARKED);
             this.survivedComboBoxEmbarked.setBounds(embarkedLabel.getX() + Constants.SPACE_BETWEEN + Constants.SPACE_BETWEEN / 2, y, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
@@ -138,7 +159,7 @@ public class ManageScreen extends JPanel implements ActionListener {
             passengerNumberMin.setBounds(x + Constants.MARGIN_FROM_LEFT + 450, 200, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
             this.add(passengerNumberMin);
             passengerNumberMin.addActionListener(e -> {
-                Integer passengerNumberMinData = 0;
+                Integer passengerNumberMinData = Constants.MIN_PASSENGER;
                 try {
                     passengerNumberMinData = Integer.parseInt(passengerNumberMin.getText());
                     System.out.println(passengerNumberMinData);
@@ -157,7 +178,7 @@ public class ManageScreen extends JPanel implements ActionListener {
             PassengerNumberMax.setBounds(x + Constants.MARGIN_FROM_LEFT + 200, 200, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
             this.add(PassengerNumberMax);
             PassengerNumberMax.addActionListener(e -> {
-                Integer PassengerNumberMaxData = 891;
+                Integer PassengerNumberMaxData = Constants.MAX_PASSENGER;
                 try {
                     PassengerNumberMaxData = Integer.parseInt(PassengerNumberMax.getText());
                     System.out.println(PassengerNumberMaxData);
@@ -172,14 +193,15 @@ public class ManageScreen extends JPanel implements ActionListener {
             passengerName.setBounds(x + Constants.MARGIN_FROM_LEFT, 160, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
             this.add(passengerName);
 
-            TextField enterPassengerName = new TextField("");
-            enterPassengerName.setBounds(x + Constants.MARGIN_FROM_LEFT, 200, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
-            this.add(enterPassengerName);
-            enterPassengerName.addActionListener(e -> {
-                String enterPassengerNameData;
+            TextField passengerNameText = new TextField("");
+            passengerNameText.setBounds(x + Constants.MARGIN_FROM_LEFT, 200, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
+            this.add(passengerNameText);
+
+            passengerNameText.addActionListener(e -> {
+                String passengerNameData = "";
                 try {
-                    enterPassengerNameData = enterPassengerName.getText();
-                    System.out.println(enterPassengerNameData);
+                    passengerNameData = passengerNameText.getText();
+                    System.out.println(passengerNameData);
 
                 } catch (Exception exception) {
                     System.out.println("Please enter a valid name");
@@ -216,9 +238,9 @@ public class ManageScreen extends JPanel implements ActionListener {
             parchAmountBox.setBounds(x + Constants.MARGIN_FROM_LEFT, 450, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(parchAmountBox);
             parchAmountBox.addActionListener(e -> {
-                Integer parchAmountData = 0;
                 try {
-                    parchAmountData = Integer.parseInt(parchAmountBox.getText());
+                    Integer parchAmountData = 0;
+                    parchAmountData = (Integer.parseInt(parchAmountBox.getText()));
                     System.out.println(parchAmountData);
 
                 } catch (Exception exception) {
@@ -236,7 +258,7 @@ public class ManageScreen extends JPanel implements ActionListener {
             ticketNumberBox.setBounds(x + Constants.MARGIN_FROM_LEFT, 350, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(ticketNumberBox);
             ticketNumberBox.addActionListener(e -> {
-                String ticketNumberData;
+                String ticketNumberData = "";
                 try {
                     ticketNumberData = ticketNumberBox.getText();
                     System.out.println(ticketNumberData);
@@ -273,8 +295,8 @@ public class ManageScreen extends JPanel implements ActionListener {
             maxTicketPrice.setBounds(x + Constants.MARGIN_FROM_LEFT + 700, 450, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(maxTicketPrice);
             maxTicketPrice.addActionListener(e -> {
-                Float maxTicketPriceData = 0f;
                 try {
+                    Float maxTicketPriceData = 0f;
                     maxTicketPriceData = Float.parseFloat(maxTicketPrice.getText());
                     System.out.println(maxTicketPriceData);
 
@@ -292,7 +314,7 @@ public class ManageScreen extends JPanel implements ActionListener {
             cabinNumberBox.setBounds(x + Constants.MARGIN_FROM_LEFT + 650, y, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
             this.add(cabinNumberBox);
             cabinNumberBox.addActionListener(e -> {
-                String cabinNumberData;
+                String cabinNumberData = "דש";
                 try {
                     cabinNumberData = cabinNumberBox.getText();
                     System.out.println(cabinNumberData);
@@ -301,20 +323,38 @@ public class ManageScreen extends JPanel implements ActionListener {
                     System.out.println("Please enter a valid cabin number");
                 }
             });
-            //check that everything works after
 
-            //Filter button - הכפתור הכי חשוב, שיהיה בצורה יפה במרכז
             JButton filter = new JButton("Filter");
             filter.setBounds(x + Constants.MARGIN_FROM_LEFT + 300, 550, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT + 20);
             filter.setFont(new Font("Filter", Font.ROMAN_BASELINE, 20));
             this.add(filter);
 
-//            TextField filterBox = new TextField("");
-//            filterBox.setBounds(x + Constants.MARGIN_FROM_LEFT+350, 450, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
-//            this.add(filterBox);
-
-
+            filter.addActionListener(e -> {
+                searchSurvived(passengers, classNumber, genderData, wentOnDeckData, passengerNumberMinData,
+                        passengerNumberMaxData, passengerNameData, parchAmountData, sibSPAmountData, ticketNumberData,
+                        maxTicketPriceData, minTicketPriceData, cabinNumberData);
+            });
         }
+    }
+
+    public void searchSurvived(ArrayList<Passenger> passenger, int classNumber, String genderData, String wentOnDeck,
+                               Integer passengerNumberMinData, Integer passengerNumberMaxData, String passengerNameData,
+                               Integer parchAmountData, Integer sibSPAmountData, String ticketNumberData, Float maxTicketPriceData,
+                               Float minTicketPriceData, String cabinNumberData) {
+
+        ArrayList<Passenger> filteredPassengers = new ArrayList<Passenger>();
+        for (int i = 0; i < this.passengers.size(); i++) {
+            if ((this.passengers.get(i).getpClass() == classNumber) && (this.passengers.get(i).getGender().equals(genderData))
+                    && (this.passengers.get(i).getCabin().equals(wentOnDeck)) && (this.passengers.get(i).getId() >= passengerNumberMinData)
+                    && (this.passengers.get(i).getId() <= passengerNumberMaxData) && (this.passengers.get(i).getName().contains(passengerNameData))
+                    && (this.passengers.get(i).getParch() <= parchAmountData) && (this.passengers.get(i).getSibSp() == sibSPAmountData)
+                    && (this.passengers.get(i).getTicket().contains(ticketNumberData)) && (this.passengers.get(i).getFare() >= minTicketPriceData
+                    && (this.passengers.get(i).getFare() <= maxTicketPriceData)) && (this.passengers.get(i).getCabin().contains(cabinNumberData))) {
+                filteredPassengers.add(passengers.get(i));
+            }
+        }
+        System.out.println(filteredPassengers);
+
     }
 
     @Override
