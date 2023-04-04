@@ -8,12 +8,12 @@ public class Passenger {
     private int sibSp;
     private int parch;
     private String ticket;
-    private double fare;
+    private float fare;
     private String cabin;
     private String embarked;
 
     public Passenger(int id, int survived, int pClass, String name, String gender, String age, int sibSp, int parch,
-                     String ticket, double fare, String cabin, String embarked) {
+                     String ticket, float fare, String cabin, String embarked) {
         this.id = id;
         this.survived = survived;
         this.pClass = pClass;
@@ -85,7 +85,7 @@ public class Passenger {
         if(name.equals(Constants.EMPTY_STRING)){
             return true;
         }else{
-            return this.name.equals(name);
+            return this.name.contains(name);
         }
     }
     public boolean validateParchAmount(int amount){
@@ -123,14 +123,14 @@ public class Passenger {
             return this.embarked.equals(embarked);
         }
     }
-    public boolean validateMinPrice(int fare){
+    public boolean validateMinPrice(float fare){
         if(fare == Constants.ZERO_VALUE){
             return true;
         }else{
             return this.fare<=fare;
         }
     }
-    public boolean validateMaxPrice(int fare){
+    public boolean validateMaxPrice(float fare){
         if(fare == Constants.ZERO_VALUE){
             return true;
         }else{

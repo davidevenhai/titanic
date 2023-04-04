@@ -44,13 +44,13 @@ public class ManageScreen extends JPanel {
                     passenger = new Passenger(Integer.parseInt(values[0]), Integer.parseInt(values[1]),
                             Integer.parseInt(values[2]), (values[3] + ", " + values[4]), values[5],
                             values[6], Integer.parseInt(values[7]), Integer.parseInt(values[8]),
-                            values[9], Double.parseDouble(values[10]), values[11],
+                            values[9], Float.parseFloat(values[10]), values[11],
                             values[12] + " ");
                 } else if (values.length == 12) {
                     passenger = new Passenger(Integer.parseInt(values[0]), Integer.parseInt(values[1]),
                             Integer.parseInt(values[2]), (values[3] + ", " + values[4]), values[5],
                             values[6], Integer.parseInt(values[7]), Integer.parseInt(values[8]), values[9],
-                            Double.parseDouble(values[10]), values[11], "");
+                            Float.parseFloat(values[10]), values[11], "");
                 }
                 passengers.add(passenger);
             }
