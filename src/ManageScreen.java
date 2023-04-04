@@ -1,9 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ManageScreen extends JPanel {
     private JComboBox<String> survivedComboBox;
@@ -20,7 +19,7 @@ public class ManageScreen extends JPanel {
     ;
     private Integer passengerNumberMinData = Constants.MIN_PASSENGER;
     private Integer passengerNumberMaxData = Constants.MAX_PASSENGER;
-    private String passengerNameData = Constants.EMPTY_STRING;
+    private String passengerNameData = "";
     private Integer sibSPAmountData = Constants.ZERO_VALUE;
 
     private Integer parchAmountData = Constants.ZERO_VALUE;
@@ -158,13 +157,14 @@ public class ManageScreen extends JPanel {
             passengerName.setBounds(x + Constants.MARGIN_FROM_LEFT, 160, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
             this.add(passengerName);
 
-            TextField passengerNameText = new TextField("");
+            TextField passengerNameText = new TextField("בעיה");
             passengerNameText.setBounds(x + Constants.MARGIN_FROM_LEFT, 200, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
             this.add(passengerNameText);
 
+
             passengerNameText.addActionListener(e -> {
                 try {
-                    passengerNameData = passengerNameText.getText();
+                    passengerNameData =passengerNameText.getText();
                     System.out.println(passengerNameData);
 
                 } catch (Exception exception) {

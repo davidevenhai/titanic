@@ -82,11 +82,7 @@ public class Passenger {
         }
     }
     public boolean validatePassengerName(String name){
-        if(name.equals(Constants.EMPTY_STRING)){
-            return true;
-        }else{
-            return this.name.contains(name);
-        }
+        return this.name.contains(name);
     }
     public boolean validateParchAmount(int amount){
         if(amount == Constants.ZERO_VALUE){
