@@ -15,7 +15,8 @@ public class ManageScreen extends JPanel {
 
     private int classNumber = 0;
     private String wentOnDeckData = Constants.EMBARKED[0];
-    ;
+    private String classData = Constants.PASSENGER_CLASS_OPTIONS[0];
+
     private Integer passengerNumberMinData = Constants.MIN_PASSENGER;
     private Integer passengerNumberMaxData = Constants.MAX_PASSENGER;
     private String passengerNameData = "";
@@ -77,29 +78,29 @@ public class ManageScreen extends JPanel {
             this.survivedComboBox.setBounds(survivedLabel.getX() + Constants.LABEL_WIDTH, survivedLabel.getY(), Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
             this.add(this.survivedComboBox);
             this.survivedComboBox.addActionListener((e) -> {
-                String classData = Constants.PASSENGER_CLASS_OPTIONS[0];
-                classData = this.survivedComboBox.getItemAt(this.survivedComboBox.getSelectedIndex());
+                this.classData = Constants.PASSENGER_CLASS_OPTIONS[0];
+                this.classData = this.survivedComboBox.getItemAt(this.survivedComboBox.getSelectedIndex());
                 if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[1])) {
                     this.classNumber = 1;
                 } else if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[2])) {
                     this.classNumber = 2;
                 } else if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[3])) {
                     this.classNumber = 3;
-                } else {
-                    classData.equals(Constants.PASSENGER_CLASS_OPTIONS[0]);
+                } else if(classData.equals(Constants.PASSENGER_CLASS_OPTIONS[0])){
+                    this.classNumber = 0;
                 }
                 System.out.println((classData));
             });
 
             JLabel survivedLabelGender = new JLabel("Gender: ");
-            survivedLabelGender.setBounds(100+ Constants.COMBO_BOX_WIDTH + Constants.SPACE_BETWEEN / 4, y, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            survivedLabelGender.setBounds(100 + Constants.COMBO_BOX_WIDTH + Constants.SPACE_BETWEEN / 4, y, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(survivedLabelGender);
             this.survivedComboBoxGender = new JComboBox<>(Constants.GENDER_TYPE);
             this.survivedComboBoxGender.setBounds(survivedLabelGender.getX() + Constants.COMBO_BOX_WIDTH, y, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
             this.add(this.survivedComboBoxGender);
             this.survivedComboBoxGender.addActionListener((e) -> {
-                genderData = this.survivedComboBoxGender.getItemAt(this.survivedComboBoxGender.getSelectedIndex());
-                System.out.println(genderData);
+                this.genderData = this.survivedComboBoxGender.getItemAt(this.survivedComboBoxGender.getSelectedIndex());
+                System.out.println(this.genderData);
 
             });
             JLabel embarkedLabel = new JLabel("Went on deck:");
@@ -109,8 +110,8 @@ public class ManageScreen extends JPanel {
             this.survivedComboBoxEmbarked.setBounds(embarkedLabel.getX() + Constants.SPACE_BETWEEN + Constants.SPACE_BETWEEN / 2, y, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
             this.add(this.survivedComboBoxEmbarked);
             this.survivedComboBoxEmbarked.addActionListener((e) -> {
-                wentOnDeckData = this.survivedComboBoxEmbarked.getItemAt(this.survivedComboBoxEmbarked.getSelectedIndex());
-                System.out.println(wentOnDeckData);
+                this.wentOnDeckData = this.survivedComboBoxEmbarked.getItemAt(this.survivedComboBoxEmbarked.getSelectedIndex());
+                System.out.println(this.wentOnDeckData);
 
             });
 
@@ -143,7 +144,7 @@ public class ManageScreen extends JPanel {
             this.add(passengerNumberMax);
             passengerNumberMax.addActionListener(e -> {
                 try {
-                    passengerNumberMaxData = Integer.parseInt(passengerNumberMax.getText());
+                    this.passengerNumberMaxData = Integer.parseInt(passengerNumberMax.getText());
                     System.out.println(passengerNumberMaxData);
 
                 } catch (Exception exception) {
@@ -163,7 +164,7 @@ public class ManageScreen extends JPanel {
 
             passengerNameText.addActionListener(e -> {
                 try {
-                   // this.passengerNameData =passengerNameText.getText();
+                    this.passengerNameData = passengerNameText.getText();
                     System.out.println(this.passengerNameData);
 
                 } catch (Exception exception) {
@@ -183,7 +184,7 @@ public class ManageScreen extends JPanel {
             this.add(sibSPAmountBox);
             sibSPAmountBox.addActionListener(e -> {
                 try {
-                    sibSPAmountData = Integer.parseInt(sibSPAmountBox.getText());
+                    this.sibSPAmountData = Integer.parseInt(sibSPAmountBox.getText());
                     System.out.println(sibSPAmountData);
 
                 } catch (Exception exception) {
@@ -201,7 +202,7 @@ public class ManageScreen extends JPanel {
             this.add(parchAmountBox);
             parchAmountBox.addActionListener(e -> {
                 try {
-                    parchAmountData = (Integer.parseInt(parchAmountBox.getText()));
+                    this.parchAmountData = (Integer.parseInt(parchAmountBox.getText()));
                     System.out.println(parchAmountData);
 
                 } catch (Exception exception) {
@@ -220,7 +221,7 @@ public class ManageScreen extends JPanel {
             this.add(ticketNumberBox);
             ticketNumberBox.addActionListener(e -> {
                 try {
-                    ticketNumberData = ticketNumberBox.getText();
+                    this.ticketNumberData = ticketNumberBox.getText();
                     System.out.println(ticketNumberData);
 
                 } catch (Exception exception) {
@@ -238,7 +239,7 @@ public class ManageScreen extends JPanel {
             this.add(minTicketPrice);
             minTicketPrice.addActionListener(e -> {
                 try {
-                    minTicketPriceData = Float.parseFloat(minTicketPrice.getText());
+                    this.minTicketPriceData = Float.parseFloat(minTicketPrice.getText());
                     System.out.println(minTicketPriceData);
 
                 } catch (Exception exception) {
@@ -255,7 +256,7 @@ public class ManageScreen extends JPanel {
             this.add(maxTicketPrice);
             maxTicketPrice.addActionListener(e -> {
                 try {
-                    maxTicketPriceData = Float.parseFloat(maxTicketPrice.getText());
+                    this.maxTicketPriceData = Float.parseFloat(maxTicketPrice.getText());
                     System.out.println(maxTicketPriceData);
 
                 } catch (Exception exception) {
@@ -273,7 +274,7 @@ public class ManageScreen extends JPanel {
             this.add(cabinNumberBox);
             cabinNumberBox.addActionListener(e -> {
                 try {
-                    // cabinNumberData = cabinNumberBox.getText();
+                    this.cabinNumberData = cabinNumberBox.getText();
                     System.out.println(cabinNumberData);
 
                 } catch (Exception exception) {
@@ -287,9 +288,9 @@ public class ManageScreen extends JPanel {
             this.add(filter);
 
             filter.addActionListener(e -> {
-                Utils.searchSurvived(passengers, classNumber, genderData, wentOnDeckData, passengerNumberMinData,
-                        passengerNumberMaxData, passengerNameText.getText(), parchAmountData, sibSPAmountData, ticketNumberData,
-                        maxTicketPriceData, minTicketPriceData, cabinNumberBox.getText());
+                Utils.searchSurvived(passengers, this.classNumber, this.genderData, this.wentOnDeckData, this.passengerNumberMinData,
+                        this.passengerNumberMaxData, passengerNameText.getText(), this.parchAmountData, this.sibSPAmountData, this.ticketNumberData,
+                        this.maxTicketPriceData, this.minTicketPriceData, cabinNumberBox.getText());
             });
 
         }

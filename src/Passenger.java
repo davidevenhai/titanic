@@ -116,7 +116,7 @@ public class Passenger {
         if(embarked.equals(Constants.EMBARKED[0])){
             return true;
         }else{
-            return this.embarked.equals(embarked);
+            return this.embarked.contains(embarked);
         }
     }
     public boolean validateMinPrice(float fare){
@@ -134,4 +134,21 @@ public class Passenger {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Passenger{" +
+                "id=" + id +
+                ", survived=" + survived +
+                ", pClass=" + pClass +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", sibSp=" + sibSp +
+                ", parch=" + parch +
+                ", ticket='" + ticket + '\'' +
+                ", fare=" + fare +
+                ", cabin='" + cabin + '\'' +
+                ", embarked='" + embarked + '\'' +
+                '}';
+    }
 }
