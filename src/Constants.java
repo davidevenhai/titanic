@@ -5,7 +5,7 @@ public class Constants {
     public static final String[] PASSENGER_CLASS_OPTIONS = { "All", "1st", "2nd", "3rd"};
     public static final String[] GENDER_TYPE = { "All", "male", "female"};
     public static final int MIN_PASSENGER = 1;
-    public static final int MAX_PASSENGER = 892;
+    public static final int MAX_PASSENGER = 891;
     public static final String[] EMBARKED = {"All","C","Q","S"};
     public static final int ZERO_VALUE = 0;
     public static final String EMPTY_STRING = "";

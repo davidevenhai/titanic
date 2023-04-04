@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class ManageScreen extends JPanel {
     private JComboBox<String> survivedComboBox;
@@ -74,18 +73,18 @@ public class ManageScreen extends JPanel {
             survivedLabel.setBounds(x, y, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
             this.add(survivedLabel);
 
-            this.survivedComboBoxGender = new JComboBox<>(Constants.PASSENGER_CLASS_OPTIONS);
-            this.survivedComboBoxGender.setBounds(survivedLabel.getX() + Constants.LABEL_WIDTH, survivedLabel.getY(), Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
-            this.add(this.survivedComboBoxGender);
-            this.survivedComboBoxGender.addActionListener((e) -> {
+            this.survivedComboBox = new JComboBox<>(Constants.PASSENGER_CLASS_OPTIONS);
+            this.survivedComboBox.setBounds(survivedLabel.getX() + Constants.LABEL_WIDTH, survivedLabel.getY(), Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
+            this.add(this.survivedComboBox);
+            this.survivedComboBox.addActionListener((e) -> {
                 String classData = Constants.PASSENGER_CLASS_OPTIONS[0];
-                classData = this.survivedComboBoxGender.getItemAt(this.survivedComboBoxGender.getSelectedIndex());
+                classData = this.survivedComboBox.getItemAt(this.survivedComboBox.getSelectedIndex());
                 if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[1])) {
-                    classNumber = 1;
+                    this.classNumber = 1;
                 } else if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[2])) {
-                    classNumber = 2;
+                    this.classNumber = 2;
                 } else if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[3])) {
-                    classNumber = 3;
+                    this.classNumber = 3;
                 } else {
                     classData.equals(Constants.PASSENGER_CLASS_OPTIONS[0]);
                 }
@@ -93,7 +92,7 @@ public class ManageScreen extends JPanel {
             });
 
             JLabel survivedLabelGender = new JLabel("Gender: ");
-            survivedLabelGender.setBounds(survivedComboBoxGender.getX() + Constants.COMBO_BOX_WIDTH + Constants.SPACE_BETWEEN / 4, y, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+            survivedLabelGender.setBounds(100+ Constants.COMBO_BOX_WIDTH + Constants.SPACE_BETWEEN / 4, y, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(survivedLabelGender);
             this.survivedComboBoxGender = new JComboBox<>(Constants.GENDER_TYPE);
             this.survivedComboBoxGender.setBounds(survivedLabelGender.getX() + Constants.COMBO_BOX_WIDTH, y, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
@@ -157,15 +156,15 @@ public class ManageScreen extends JPanel {
             passengerName.setBounds(x + Constants.MARGIN_FROM_LEFT, 160, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
             this.add(passengerName);
 
-            TextField passengerNameText = new TextField("בעיה");
+            TextField passengerNameText = new TextField("");
             passengerNameText.setBounds(x + Constants.MARGIN_FROM_LEFT, 200, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
             this.add(passengerNameText);
 
 
             passengerNameText.addActionListener(e -> {
                 try {
-                    passengerNameData =passengerNameText.getText();
-                    System.out.println(passengerNameData);
+                   // this.passengerNameData =passengerNameText.getText();
+                    System.out.println(this.passengerNameData);
 
                 } catch (Exception exception) {
                     System.out.println("Please enter a valid name");
@@ -274,7 +273,7 @@ public class ManageScreen extends JPanel {
             this.add(cabinNumberBox);
             cabinNumberBox.addActionListener(e -> {
                 try {
-                    cabinNumberData = cabinNumberBox.getText();
+                    // cabinNumberData = cabinNumberBox.getText();
                     System.out.println(cabinNumberData);
 
                 } catch (Exception exception) {
@@ -289,9 +288,10 @@ public class ManageScreen extends JPanel {
 
             filter.addActionListener(e -> {
                 Utils.searchSurvived(passengers, classNumber, genderData, wentOnDeckData, passengerNumberMinData,
-                        passengerNumberMaxData, passengerNameData, parchAmountData, sibSPAmountData, ticketNumberData,
-                        maxTicketPriceData, minTicketPriceData, cabinNumberData);
+                        passengerNumberMaxData, passengerNameText.getText(), parchAmountData, sibSPAmountData, ticketNumberData,
+                        maxTicketPriceData, minTicketPriceData, cabinNumberBox.getText());
             });
+
         }
     }
 
