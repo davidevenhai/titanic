@@ -6,7 +6,7 @@ public class Constants {
     public static final String[] SEX_TYPE = { "All", "Male", "Female"};
     public static final int MIN_PASSENGER = 1;
     public static final int MAX_PASSENGER = 892;
-    public static final String[] EMBARKED = {"C","Q","S"};
+    public static final String[] EMBARKED = {"All","C","Q","S"};
 
     public static final int MARGIN_FROM_TOP = 10;//זה הY שלנו
     public static final int MARGIN_FROM_LEFT = 5;//זה הX שלנו
