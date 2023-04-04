@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
-public class ManageScreen extends JPanel implements ActionListener {
+public class ManageScreen extends JPanel {
     private JComboBox<String> survivedComboBox;
     private JComboBox<String> survivedComboBoxGender;
     private JComboBox<String> survivedComboBoxEmbarked;
@@ -13,17 +13,21 @@ public class ManageScreen extends JPanel implements ActionListener {
 
     public ArrayList<String> values;
     private String cabinNumberData = "";
-    private String genderData="";
-    private int classNumber;
-    private String wentOnDeckData;
-    private Integer passengerNumberMinData;
-    private Integer passengerNumberMaxData;
-    private String passengerNameData;
-    private Integer sibSPAmountData;
-    private Integer parchAmountData;
-    private String ticketNumberData;
-    private Float minTicketPriceData;
-    private Float maxTicketPriceData;
+    private String genderData = Constants.GENDER_TYPE[0];
+
+    private int classNumber = 0;
+    private String wentOnDeckData = Constants.EMBARKED[0];
+    ;
+    private Integer passengerNumberMinData = Constants.MIN_PASSENGER;
+    private Integer passengerNumberMaxData = Constants.MAX_PASSENGER;
+    private String passengerNameData = Constants.EMPTY_STRING;
+    private Integer sibSPAmountData = Constants.ZERO_VALUE;
+
+    private Integer parchAmountData = Constants.ZERO_VALUE;
+    private String ticketNumberData = Constants.EMPTY_STRING;
+    private Float minTicketPriceData = (float) Constants.ZERO_VALUE;
+    ;
+    private Float maxTicketPriceData = (float) Constants.ZERO_VALUE;
 
 
     private Image backGround;
@@ -61,7 +65,7 @@ public class ManageScreen extends JPanel implements ActionListener {
     public ManageScreen(int x, int y, int width, int height) {
 
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
-        backGround = new ImageIcon("C:\\Users\\עומר\\Downloads\\תמונה טיטאניק.jpg").getImage();
+        // backGround = new ImageIcon("C:\\Users\\עומר\\Downloads\\תמונה טיטאניק.jpg").getImage();
 
         if (file.exists()) {
             ReadData(file);
@@ -77,14 +81,13 @@ public class ManageScreen extends JPanel implements ActionListener {
             this.survivedComboBoxGender.addActionListener((e) -> {
                 String classData = Constants.PASSENGER_CLASS_OPTIONS[0];
                 classData = this.survivedComboBoxGender.getItemAt(this.survivedComboBoxGender.getSelectedIndex());
-                int classNumber = 0;
                 if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[1])) {
                     classNumber = 1;
                 } else if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[2])) {
                     classNumber = 2;
                 } else if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[3])) {
                     classNumber = 3;
-                } else{
+                } else {
                     classData.equals(Constants.PASSENGER_CLASS_OPTIONS[0]);
                 }
                 System.out.println((classData));
@@ -97,7 +100,6 @@ public class ManageScreen extends JPanel implements ActionListener {
             this.survivedComboBoxGender.setBounds(survivedLabelGender.getX() + Constants.COMBO_BOX_WIDTH, y, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
             this.add(this.survivedComboBoxGender);
             this.survivedComboBoxGender.addActionListener((e) -> {
-                String genderData = Constants.GENDER_TYPE[0];
                 genderData = this.survivedComboBoxGender.getItemAt(this.survivedComboBoxGender.getSelectedIndex());
                 System.out.println(genderData);
 
@@ -109,45 +111,9 @@ public class ManageScreen extends JPanel implements ActionListener {
             this.survivedComboBoxEmbarked.setBounds(embarkedLabel.getX() + Constants.SPACE_BETWEEN + Constants.SPACE_BETWEEN / 2, y, Constants.COMBO_BOX_WIDTH, Constants.COMBO_BOX_HEIGHT);
             this.add(this.survivedComboBoxEmbarked);
             this.survivedComboBoxEmbarked.addActionListener((e) -> {
-                String wentOnDeckData = Constants.EMBARKED[0];
                 wentOnDeckData = this.survivedComboBoxEmbarked.getItemAt(this.survivedComboBoxEmbarked.getSelectedIndex());
                 System.out.println(wentOnDeckData);
 
-            });
-            JLabel ageMin = new JLabel("Min age");
-            ageMin.setBounds(x + Constants.MARGIN_FROM_LEFT + 700, 500, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
-            this.add(ageMin);
-
-            TextField minAge = new TextField("");
-            minAge.setBounds(x + Constants.MARGIN_FROM_LEFT + 700, 550, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
-            this.add(minAge);
-            minAge.addActionListener(e -> {
-                Integer minAgeData = 0;
-                try {
-                    minAgeData = Integer.parseInt(minAge.getText());
-                    System.out.println(minAgeData);
-
-                } catch (Exception exception) {
-                    System.out.println("Please enter a valid number");
-                }
-            });
-
-            JLabel ageMax = new JLabel("Max age");
-            ageMax.setBounds(x + Constants.MARGIN_FROM_LEFT + 700, 160, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
-            this.add(ageMax);
-
-            TextField maxAge = new TextField("");
-            maxAge.setBounds(x + Constants.MARGIN_FROM_LEFT + 700, 200, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
-            this.add(maxAge);
-            maxAge.addActionListener(e -> {
-                Integer maxAgeData = 0;
-                try {
-                    maxAgeData = Integer.parseInt(maxAge.getText());
-                    System.out.println(maxAgeData);
-
-                } catch (Exception exception) {
-                    System.out.println("Please enter a valid number");
-                }
             });
 
             //Min-Max passenger labels/Text Field.
@@ -174,14 +140,13 @@ public class ManageScreen extends JPanel implements ActionListener {
             maxPassengerNumber.setBounds(x + Constants.MARGIN_FROM_LEFT + 200, 160, Constants.LABEL_WIDTH / 2 + 90, Constants.LABEL_HEIGHT);
             this.add(maxPassengerNumber);
 
-            TextField PassengerNumberMax = new TextField("");
-            PassengerNumberMax.setBounds(x + Constants.MARGIN_FROM_LEFT + 200, 200, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
-            this.add(PassengerNumberMax);
-            PassengerNumberMax.addActionListener(e -> {
-                Integer PassengerNumberMaxData = Constants.MAX_PASSENGER;
+            TextField passengerNumberMax = new TextField("");
+            passengerNumberMax.setBounds(x + Constants.MARGIN_FROM_LEFT + 200, 200, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
+            this.add(passengerNumberMax);
+            passengerNumberMax.addActionListener(e -> {
                 try {
-                    PassengerNumberMaxData = Integer.parseInt(PassengerNumberMax.getText());
-                    System.out.println(PassengerNumberMaxData);
+                    passengerNumberMaxData = Integer.parseInt(passengerNumberMax.getText());
+                    System.out.println(passengerNumberMaxData);
 
                 } catch (Exception exception) {
                     System.out.println("Please enter a valid number");
@@ -198,7 +163,6 @@ public class ManageScreen extends JPanel implements ActionListener {
             this.add(passengerNameText);
 
             passengerNameText.addActionListener(e -> {
-                String passengerNameData = "";
                 try {
                     passengerNameData = passengerNameText.getText();
                     System.out.println(passengerNameData);
@@ -219,7 +183,6 @@ public class ManageScreen extends JPanel implements ActionListener {
             sibSPAmountBox.setBounds(x + Constants.MARGIN_FROM_LEFT, 550, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
             this.add(sibSPAmountBox);
             sibSPAmountBox.addActionListener(e -> {
-                Integer sibSPAmountData = 0;
                 try {
                     sibSPAmountData = Integer.parseInt(sibSPAmountBox.getText());
                     System.out.println(sibSPAmountData);
@@ -239,7 +202,6 @@ public class ManageScreen extends JPanel implements ActionListener {
             this.add(parchAmountBox);
             parchAmountBox.addActionListener(e -> {
                 try {
-                    Integer parchAmountData = 0;
                     parchAmountData = (Integer.parseInt(parchAmountBox.getText()));
                     System.out.println(parchAmountData);
 
@@ -258,7 +220,6 @@ public class ManageScreen extends JPanel implements ActionListener {
             ticketNumberBox.setBounds(x + Constants.MARGIN_FROM_LEFT, 350, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(ticketNumberBox);
             ticketNumberBox.addActionListener(e -> {
-                String ticketNumberData = "";
                 try {
                     ticketNumberData = ticketNumberBox.getText();
                     System.out.println(ticketNumberData);
@@ -277,7 +238,6 @@ public class ManageScreen extends JPanel implements ActionListener {
             minTicketPrice.setBounds(x + Constants.MARGIN_FROM_LEFT + 700, 350, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(minTicketPrice);
             minTicketPrice.addActionListener(e -> {
-                Float minTicketPriceData = 0f;
                 try {
                     minTicketPriceData = Float.parseFloat(minTicketPrice.getText());
                     System.out.println(minTicketPriceData);
@@ -296,7 +256,6 @@ public class ManageScreen extends JPanel implements ActionListener {
             this.add(maxTicketPrice);
             maxTicketPrice.addActionListener(e -> {
                 try {
-                    Float maxTicketPriceData = 0f;
                     maxTicketPriceData = Float.parseFloat(maxTicketPrice.getText());
                     System.out.println(maxTicketPriceData);
 
@@ -314,7 +273,6 @@ public class ManageScreen extends JPanel implements ActionListener {
             cabinNumberBox.setBounds(x + Constants.MARGIN_FROM_LEFT + 650, y, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
             this.add(cabinNumberBox);
             cabinNumberBox.addActionListener(e -> {
-                String cabinNumberData = "דש";
                 try {
                     cabinNumberData = cabinNumberBox.getText();
                     System.out.println(cabinNumberData);
@@ -330,43 +288,19 @@ public class ManageScreen extends JPanel implements ActionListener {
             this.add(filter);
 
             filter.addActionListener(e -> {
-                searchSurvived(passengers, classNumber, genderData, wentOnDeckData, passengerNumberMinData,
+                Utils.searchSurvived(passengers, classNumber, genderData, wentOnDeckData, passengerNumberMinData,
                         passengerNumberMaxData, passengerNameData, parchAmountData, sibSPAmountData, ticketNumberData,
                         maxTicketPriceData, minTicketPriceData, cabinNumberData);
             });
         }
     }
 
-    public void searchSurvived(ArrayList<Passenger> passenger, int classNumber, String genderData, String wentOnDeck,
-                               Integer passengerNumberMinData, Integer passengerNumberMaxData, String passengerNameData,
-                               Integer parchAmountData, Integer sibSPAmountData, String ticketNumberData, Float maxTicketPriceData,
-                               Float minTicketPriceData, String cabinNumberData) {
-
-        ArrayList<Passenger> filteredPassengers = new ArrayList<Passenger>();
-        for (int i = 0; i < this.passengers.size(); i++) {
-            if ((this.passengers.get(i).getpClass() == classNumber) && (this.passengers.get(i).getGender().equals(genderData))
-                    && (this.passengers.get(i).getCabin().equals(wentOnDeck)) && (this.passengers.get(i).getId() >= passengerNumberMinData)
-                    && (this.passengers.get(i).getId() <= passengerNumberMaxData) && (this.passengers.get(i).getName().contains(passengerNameData))
-                    && (this.passengers.get(i).getParch() <= parchAmountData) && (this.passengers.get(i).getSibSp() == sibSPAmountData)
-                    && (this.passengers.get(i).getTicket().contains(ticketNumberData)) && (this.passengers.get(i).getFare() >= minTicketPriceData
-                    && (this.passengers.get(i).getFare() <= maxTicketPriceData)) && (this.passengers.get(i).getCabin().contains(cabinNumberData))) {
-                filteredPassengers.add(passengers.get(i));
-            }
-        }
-        System.out.println(filteredPassengers);
-
-    }
-
-    @Override
     public void paintComponent(Graphics g) {
         super.paintComponents(g);
         g.drawImage(backGround, 0, 0, null);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-    }
 }
 //TextField passengerName = new TextField("");
 //            passengerName.setBounds(x + Constants.MARGIN_FROM_LEFT * 2, y + 70, Constants.LABEL_WIDTH * 2, Constants.LABEL_HEIGHT);

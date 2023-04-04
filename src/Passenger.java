@@ -53,48 +53,89 @@ public class Passenger {
         }
         return formattedName;
     }
-
-    public int getId() {
-        return id;
+    public boolean validatePClass(int pClass){
+        if(pClass == 0){
+            return true;
+        }else{
+            return pClass == this.pClass;
+        }
+    }
+    public boolean validateTicketNumber(String ticket){
+        if(ticket.equals("")){
+            return true;
+        }else{
+            return this.ticket.contains(ticket);
+        }
+    }
+    public boolean validateMinId(int id){
+        if(id == Constants.MIN_PASSENGER){
+            return true;
+        }else{
+            return this.id>=id;
+        }
+    }
+    public boolean validateMaxId(int id){
+        if(id == Constants.MAX_PASSENGER){
+            return true;
+        }else{
+            return this.id>=id;
+        }
+    }
+    public boolean validatePassengerName(String name){
+        if(name.equals(Constants.EMPTY_STRING)){
+            return true;
+        }else{
+            return this.name.equals(name);
+        }
+    }
+    public boolean validateParchAmount(int amount){
+        if(amount == Constants.ZERO_VALUE){
+            return true;
+        }else{
+            return this.parch == amount;
+        }
+    }
+    public boolean validateSibSPAmount(int amount){
+        if(amount == Constants.ZERO_VALUE){
+            return true;
+        }else{
+            return this.sibSp == amount;
+        }
+    }
+    public boolean validateCabinNumberData(String cabin){
+        if(cabin.equals(Constants.EMPTY_STRING)){
+            return true;
+        }else{
+            return this.cabin.equals(cabin);
+        }
+    }
+    public boolean validateGender(String gender){
+        if(gender.equals(Constants.GENDER_TYPE[0])){
+            return true;
+        }else{
+            return this.gender.equals(gender);
+        }
+    }
+    public boolean validateEmbarked(String embarked){
+        if(embarked.equals(Constants.EMBARKED[0])){
+            return true;
+        }else{
+            return this.embarked.equals(embarked);
+        }
+    }
+    public boolean validateMinPrice(int fare){
+        if(fare == Constants.ZERO_VALUE){
+            return true;
+        }else{
+            return this.fare<=fare;
+        }
+    }
+    public boolean validateMaxPrice(int fare){
+        if(fare == Constants.ZERO_VALUE){
+            return true;
+        }else{
+            return this.fare>=fare;
+        }
     }
 
-    public int getSurvived() {
-        return survived;
-    }
-
-    public int getpClass() {
-        return pClass;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public float getAge() {
-        return age;
-    }
-
-    public int getSibSp() {
-        return sibSp;
-    }
-
-    public int getParch() {
-        return parch;
-    }
-
-    public String getTicket() {
-        return ticket;
-    }
-
-    public double getFare() {
-        return fare;
-    }
-
-    public String getCabin() {
-        return cabin;
-    }
-
-    public String getEmbarked() {
-        return embarked;
-    }
 }
