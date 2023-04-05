@@ -18,7 +18,7 @@ public class ManageScreen extends JPanel {
     private int classNumber = 0;
     private String wentOnDeckData = Constants.EMBARKED[0];
     private String classData = Constants.PASSENGER_CLASS_OPTIONS[0];
-
+    private JButton filter;
     private Integer passengerNumberMinData = Constants.MIN_PASSENGER;
     private Integer passengerNumberMaxData = Constants.MAX_PASSENGER;
     private String passengerNameData = "";
@@ -93,6 +93,11 @@ public class ManageScreen extends JPanel {
                 }
                 System.out.println((classData));
             });
+            this.filter = new JButton("Filter");
+            filter.setBounds(x + Constants.MARGIN_FROM_LEFT + 300, 550, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT + 20);
+            filter.setFont(new Font("Filter", Font.ROMAN_BASELINE, 20));
+            this.add(filter);
+
 
             JLabel survivedLabelGender = new JLabel("Gender: ");
             survivedLabelGender.setBounds(100 + Constants.COMBO_BOX_WIDTH + Constants.SPACE_BETWEEN / 4, y, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
@@ -145,13 +150,7 @@ public class ManageScreen extends JPanel {
             passengerNumberMax.setBounds(x + Constants.MARGIN_FROM_LEFT + 200, 200, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
             this.add(passengerNumberMax);
             passengerNumberMax.addActionListener(e -> {
-                try {
-                    this.passengerNumberMaxData = Integer.parseInt(passengerNumberMax.getText());
-                    System.out.println(passengerNumberMaxData);
-
-                } catch (Exception exception) {
-                    System.out.println("Please enter a valid number");
-                }
+               filter.setEnabled(true);
             });
 
             //Passenger name;
@@ -253,9 +252,17 @@ public class ManageScreen extends JPanel {
             maxPriceLabel.setBounds(x + Constants.MARGIN_FROM_LEFT + 700, 400, Constants.LABEL_WIDTH / 2 + 90, Constants.LABEL_HEIGHT);
             this.add(maxPriceLabel);
 
-            TextField maxTicketPrice = new TextField("");
+            TextField maxTicketPrice = new TextField(" ");
             maxTicketPrice.setBounds(x + Constants.MARGIN_FROM_LEFT + 700, 450, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(maxTicketPrice);
+
+//            maxTicketPrice.addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    maxTicketPrice.setEnabled(false);
+//                    maxTicketPrice.setEnabled(true);
+//                }
+//            });
             maxTicketPrice.addActionListener(e -> {
                 try {
                     this.maxTicketPriceData = Float.parseFloat(maxTicketPrice.getText());
