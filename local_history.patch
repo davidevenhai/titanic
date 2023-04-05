@@ -1,0 +1,234 @@
+Index: src/ManageScreen.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ManageScreen.java b/src/ManageScreen.java
+--- a/src/ManageScreen.java	
++++ b/src/ManageScreen.java	(date 1680689893196)
+@@ -1,5 +1,7 @@
+ import javax.swing.*;
+ import java.awt.*;
++import java.awt.event.KeyEvent;
++import java.awt.event.KeyListener;
+ import java.io.*;
+ import java.util.ArrayList;
+ 
+@@ -29,7 +31,15 @@
+     private Float maxTicketPriceData = (float) Constants.ZERO_VALUE;
+ 
+ 
+-    private Image backGround;
++    private TextField passengerNumberMax;
++    private TextField cabinNumberBox;
++    private TextField passengerNumberMin;
++    private TextField passengerNameText;
++    private TextField sibSPAmountBox;
++    private TextField parchAmountBox;
++    private TextField ticketNumberBox;
++    private TextField maxTicketPrice;
++    private TextField minTicketPrice;
+ 
+     public void ReadData(File file) {
+         String data;
+@@ -44,7 +54,7 @@
+                             Integer.parseInt(values[2]), (values[3] + ", " + values[4]), values[5],
+                             values[6], Integer.parseInt(values[7]), Integer.parseInt(values[8]),
+                             values[9], Float.parseFloat(values[10]), values[11],
+-                            values[12] + " ");
++                            values[12] + "");
+                 } else if (values.length == 12) {
+                     passenger = new Passenger(Integer.parseInt(values[0]), Integer.parseInt(values[1]),
+                             Integer.parseInt(values[2]), (values[3] + ", " + values[4]), values[5],
+@@ -86,7 +96,7 @@
+                     this.classNumber = 2;
+                 } else if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[3])) {
+                     this.classNumber = 3;
+-                } else if(classData.equals(Constants.PASSENGER_CLASS_OPTIONS[0])){
++                } else if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[0])) {
+                     this.classNumber = 0;
+                 }
+                 System.out.println((classData));
+@@ -120,14 +130,14 @@
+             minPassengerNumber.setBounds(x + Constants.MARGIN_FROM_LEFT + 450, 160, Constants.LABEL_WIDTH / 2 + 90, Constants.LABEL_HEIGHT);
+             this.add(minPassengerNumber);
+ 
+-            TextField passengerNumberMin = new TextField("");
++            passengerNumberMin = new TextField("");
+             passengerNumberMin.setBounds(x + Constants.MARGIN_FROM_LEFT + 450, 200, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
+             this.add(passengerNumberMin);
+             passengerNumberMin.addActionListener(e -> {
+                 Integer passengerNumberMinData = Constants.MIN_PASSENGER;
+                 try {
+-                    passengerNumberMinData = Integer.parseInt(passengerNumberMin.getText());
+-                    System.out.println(passengerNumberMinData);
++                    this.passengerNumberMinData = Integer.parseInt(passengerNumberMin.getText());
++                    System.out.println(this.passengerNumberMinData);
+ 
+                 } catch (Exception exception) {
+                     System.out.println("Please enter a valid number");
+@@ -139,16 +149,18 @@
+             maxPassengerNumber.setBounds(x + Constants.MARGIN_FROM_LEFT + 200, 160, Constants.LABEL_WIDTH / 2 + 90, Constants.LABEL_HEIGHT);
+             this.add(maxPassengerNumber);
+ 
+-            TextField passengerNumberMax = new TextField("");
++            this.passengerNumberMax = new TextField("");
+             passengerNumberMax.setBounds(x + Constants.MARGIN_FROM_LEFT + 200, 200, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
+             this.add(passengerNumberMax);
+             passengerNumberMax.addActionListener(e -> {
++                this.passengerNumberMaxData = Constants.MAX_PASSENGER;
+                 try {
+                     this.passengerNumberMaxData = Integer.parseInt(passengerNumberMax.getText());
+                     System.out.println(passengerNumberMaxData);
+ 
+                 } catch (Exception exception) {
+                     System.out.println("Please enter a valid number");
++                    this.passengerNumberMaxData = Constants.MAX_PASSENGER;
+                 }
+             });
+ 
+@@ -157,7 +169,7 @@
+             passengerName.setBounds(x + Constants.MARGIN_FROM_LEFT, 160, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
+             this.add(passengerName);
+ 
+-            TextField passengerNameText = new TextField("");
++            passengerNameText = new TextField("");
+             passengerNameText.setBounds(x + Constants.MARGIN_FROM_LEFT, 200, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
+             this.add(passengerNameText);
+ 
+@@ -179,7 +191,7 @@
+             sibSPAmount.setBounds(x + Constants.MARGIN_FROM_LEFT, 500, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
+             this.add(sibSPAmount);
+ 
+-            TextField sibSPAmountBox = new TextField("");
++            sibSPAmountBox = new TextField("");
+             sibSPAmountBox.setBounds(x + Constants.MARGIN_FROM_LEFT, 550, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
+             this.add(sibSPAmountBox);
+             sibSPAmountBox.addActionListener(e -> {
+@@ -197,7 +209,7 @@
+             parchAmount.setBounds(x + Constants.MARGIN_FROM_LEFT, 400, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+             this.add(parchAmount);
+ 
+-            TextField parchAmountBox = new TextField("");
++            parchAmountBox = new TextField("");
+             parchAmountBox.setBounds(x + Constants.MARGIN_FROM_LEFT, 450, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+             this.add(parchAmountBox);
+             parchAmountBox.addActionListener(e -> {
+@@ -216,7 +228,7 @@
+             ticketNumber.setBounds(x + Constants.MARGIN_FROM_LEFT, 300, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
+             this.add(ticketNumber);
+ 
+-            TextField ticketNumberBox = new TextField("");
++            ticketNumberBox = new TextField("");
+             ticketNumberBox.setBounds(x + Constants.MARGIN_FROM_LEFT, 350, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+             this.add(ticketNumberBox);
+             ticketNumberBox.addActionListener(e -> {
+@@ -234,7 +246,7 @@
+             minTicketLabel.setBounds(x + Constants.MARGIN_FROM_LEFT + 700, 300, Constants.LABEL_WIDTH / 2 + 90, Constants.LABEL_HEIGHT);
+             this.add(minTicketLabel);
+ 
+-            TextField minTicketPrice = new TextField("");
++            minTicketPrice = new TextField("");
+             minTicketPrice.setBounds(x + Constants.MARGIN_FROM_LEFT + 700, 350, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+             this.add(minTicketPrice);
+             minTicketPrice.addActionListener(e -> {
+@@ -251,7 +263,7 @@
+             maxPriceLabel.setBounds(x + Constants.MARGIN_FROM_LEFT + 700, 400, Constants.LABEL_WIDTH / 2 + 90, Constants.LABEL_HEIGHT);
+             this.add(maxPriceLabel);
+ 
+-            TextField maxTicketPrice = new TextField("");
++            maxTicketPrice = new TextField("");
+             maxTicketPrice.setBounds(x + Constants.MARGIN_FROM_LEFT + 700, 450, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+             this.add(maxTicketPrice);
+             maxTicketPrice.addActionListener(e -> {
+@@ -269,7 +281,7 @@
+             cabinNumber.setBounds(x + Constants.MARGIN_FROM_LEFT + 600, y, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
+             this.add(cabinNumber);
+ 
+-            TextField cabinNumberBox = new TextField("");
++            cabinNumberBox = new TextField("");
+             cabinNumberBox.setBounds(x + Constants.MARGIN_FROM_LEFT + 650, y, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
+             this.add(cabinNumberBox);
+             cabinNumberBox.addActionListener(e -> {
+@@ -286,19 +298,76 @@
+             filter.setBounds(x + Constants.MARGIN_FROM_LEFT + 300, 550, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT + 20);
+             filter.setFont(new Font("Filter", Font.ROMAN_BASELINE, 20));
+             this.add(filter);
+-
++           // resetToDefault();
+             filter.addActionListener(e -> {
+-                Utils.searchSurvived(passengers, this.classNumber, this.genderData, this.wentOnDeckData, this.passengerNumberMinData,
+-                        this.passengerNumberMaxData, passengerNameText.getText(), this.parchAmountData, this.sibSPAmountData, this.ticketNumberData,
+-                        this.maxTicketPriceData, this.minTicketPriceData, cabinNumberBox.getText());
++                if (validateNumbers()) {
++                    Utils.searchSurvived(passengers, this.classNumber, this.genderData, this.wentOnDeckData,
++                            Integer.parseInt(passengerNumberMin.getText()),
++                            Integer.parseInt(passengerNumberMax.getText()), passengerNameText.getText(), this.parchAmountData, this.sibSPAmountData, this.ticketNumberData,
++                            this.maxTicketPriceData, this.minTicketPriceData, cabinNumberBox.getText());
++                }
++                resetToDefault();
+             });
+ 
+         }
+     }
++
++    //numbers - passengerNumberMax,maxTicketPriceData,minTicketPriceData,passengerNumberMinData
++    public boolean validateNumbers() {
++        boolean valid = false;
++        try {
++            if(!this.passengerNumberMax.getText().equals("")){
++                Integer check = Integer.parseInt(this.passengerNumberMax.getText());
++            }
++            if(!this.passengerNumberMin.getText().equals("")){
++                Integer check1 =Integer.parseInt(this.passengerNumberMin.getText());
++            }
++            if(!this.maxTicketPrice.getText().equals("")){
++                Integer check2 =Integer.parseInt(maxTicketPrice.getText());
++            }
++            if(!this.minTicketPrice.getText().equals("")){
++                Integer check3 =Integer.parseInt(minTicketPrice.getText());
++            }
++            valid = true;
++        } catch (Exception exception) {
++            System.out.println("Invalid numberss");
++        }
++        return valid;
++    }
+
++//    public boolean validateNumbers() {
++//        boolean valid = false;
++//        try {
++//            if ((Integer.parseInt(this.passengerNumberMax.getText()) <= Constants.MAX_PASSENGER) && (Integer.parseInt(this.passengerNumberMin.getText()) >= Constants.ZERO_VALUE)) {
++//                Integer.parseInt(maxTicketPrice.getText());
++//                if (Integer.parseInt(minTicketPrice.getText()) >= 0) {
++//                valid = true;
++//                }
++//            }
++//        }catch (Exception exception){
++//            System.out.println("Invalid numbers");
++//        }
++//        return valid;
++//    }
++
++    //this.passengerNumberMaxData
++    public void resetToDefault() {
++        this.cabinNumberData = "";
++        this.genderData = Constants.GENDER_TYPE[0];
++        this.classNumber = 0;
++        this.passengerNumberMinData = Constants.MIN_PASSENGER;
++        this.passengerNumberMaxData = Constants.MAX_PASSENGER;
++        this.passengerNameData = "";
++        this.sibSPAmountData = Constants.ZERO_VALUE;
++        this.parchAmountData = Constants.ZERO_VALUE;
++        this.ticketNumberData = Constants.EMPTY_STRING;
++        this.minTicketPriceData = (float) Constants.ZERO_VALUE;
++        this.maxTicketPriceData = (float) Constants.ZERO_VALUE;
++    }
+ 
+     public void paintComponent(Graphics g) {
+         super.paintComponents(g);
+-        g.drawImage(backGround, 0, 0, null);
++//        g.drawImage(backGround, 0, 0, null);
+     }
+ 
+ 

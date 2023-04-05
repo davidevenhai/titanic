@@ -78,7 +78,7 @@ public class Passenger {
         if(id == Constants.MAX_PASSENGER){
             return true;
         }else{
-            return this.id>=id;
+            return this.id<=id;
         }
     }
     public boolean validatePassengerName(String name){
@@ -102,7 +102,7 @@ public class Passenger {
         if(cabin.equals(Constants.EMPTY_STRING)){
             return true;
         }else{
-            return this.cabin.equals(cabin);
+            return this.cabin.contains(cabin);
         }
     }
     public boolean validateGender(String gender){

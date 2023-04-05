@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -86,7 +88,7 @@ public class ManageScreen extends JPanel {
                     this.classNumber = 2;
                 } else if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[3])) {
                     this.classNumber = 3;
-                } else if(classData.equals(Constants.PASSENGER_CLASS_OPTIONS[0])){
+                } else if (classData.equals(Constants.PASSENGER_CLASS_OPTIONS[0])) {
                     this.classNumber = 0;
                 }
                 System.out.println((classData));
@@ -282,20 +284,53 @@ public class ManageScreen extends JPanel {
                 }
             });
 
-            JButton filter = new JButton("Filter");
-            filter.setBounds(x + Constants.MARGIN_FROM_LEFT + 300, 550, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT + 20);
-            filter.setFont(new Font("Filter", Font.ROMAN_BASELINE, 20));
-            this.add(filter);
 
             filter.addActionListener(e -> {
+                if ( checkInt(passengerNumberMax.getText())==0){
+                    filter.setEnabled(false);
+                }else {
+                    filter.setEnabled(true);
+                }
+                //filter.setEnabled(true);
                 Utils.searchSurvived(passengers, this.classNumber, this.genderData, this.wentOnDeckData, this.passengerNumberMinData,
-                        this.passengerNumberMaxData, passengerNameText.getText(), this.parchAmountData, this.sibSPAmountData, this.ticketNumberData,
+                        checkInt(passengerNumberMax.getText()), passengerNameText.getText(), this.parchAmountData, this.sibSPAmountData, this.ticketNumberData,
                         this.maxTicketPriceData, this.minTicketPriceData, cabinNumberBox.getText());
             });
 
         }
     }
 
+    public int checkInt(String str) {
+        int check =0 ;
+        String digit = "0123456789";
+        boolean isOk = true;
+        for (int i=0;i<str.length();i++){
+            if (!digit.contains(str.charAt(i)+"")){
+                isOk = false;
+                break;
+            }
+        }
+        if (isOk){
+           check = Integer.parseInt(str);
+        }
+        return check;
+    }
+
+//        public boolean validateNumbers() {
+//            boolean valid = false;
+//            try {
+//
+//
+//                valid = true;
+//            } catch (Exception exception) {
+//                System.out.println("Invalid numbers");
+//            }
+//            return valid;
+//        }
+
+//void setEnabled(boolean b) ,
+
+    //this.passengerNumberMaxData
     public void paintComponent(Graphics g) {
         super.paintComponents(g);
         g.drawImage(backGround, 0, 0, null);
