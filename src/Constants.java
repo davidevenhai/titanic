@@ -8,6 +8,7 @@ public class Constants {
     public static final int MAX_PASSENGER = 891;
     public static final String[] EMBARKED = {"All","C","Q","S"};
     public static final int ZERO_VALUE = 0;
+    public static final int DEFAULT_VALUE = -1;
     public static final String EMPTY_STRING = "";
 
 
@@ -18,6 +19,6 @@ public class Constants {
     public static final int LABEL_HEIGHT = 30;//זה הגובה
     public static final int COMBO_BOX_WIDTH = 80;//זה של הקומבו בוקס של הבחירה (עובי)
     public static final int COMBO_BOX_HEIGHT = 30;//זה של הקומבו בוקס של הבחירה (עובי)
-
+    public static final int SURVIVED = 1;
 
 }

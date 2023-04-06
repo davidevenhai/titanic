@@ -43,6 +43,9 @@ public class Passenger {
     public String getName() {
         return name;
     }
+    public boolean survived(){
+        return this.survived == Constants.SURVIVED;
+    }
 
     public String getFormattedName(String name) {
         String formattedName = "";
@@ -82,7 +85,11 @@ public class Passenger {
         }
     }
     public boolean validatePassengerName(String name){
-        return this.name.contains(name);
+        if(name.equals(Constants.EMPTY_STRING)){
+            return true;
+        }else{
+            return this.name.contains(name);
+        }
     }
     public boolean validateParchAmount(int amount){
         if(amount == Constants.ZERO_VALUE){
@@ -92,7 +99,7 @@ public class Passenger {
         }
     }
     public boolean validateSibSPAmount(int amount){
-        if(amount == Constants.ZERO_VALUE){
+        if(amount == Constants.DEFAULT_VALUE){
             return true;
         }else{
             return this.sibSp == amount;
@@ -123,17 +130,16 @@ public class Passenger {
         if(fare == Constants.ZERO_VALUE){
             return true;
         }else{
-            return this.fare<=fare;
-        }
-    }
-    public boolean validateMaxPrice(float fare){
-        if(fare == Constants.ZERO_VALUE){
-            return true;
-        }else{
             return this.fare>=fare;
         }
     }
-
+    public boolean validateMaxPrice(float fare){
+        if(fare == Constants.DEFAULT_VALUE){
+            return true;
+        }else{
+            return this.fare<=fare;
+        }
+    }
     @Override
     public String toString() {
         return "Passenger{" +

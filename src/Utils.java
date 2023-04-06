@@ -1,12 +1,14 @@
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Utils {
-
-
-    public static void searchSurvived(ArrayList<Passenger> passengers, int classNumber, String genderData, String wentOnDeck,
-                                      Integer passengerNumberMinData, Integer passengerNumberMaxData, String passengerNameData,
-                                      Integer parchAmountData, Integer sibSPAmountData, String ticketNumberData, Float maxTicketPriceData,
-                                      Float minTicketPriceData, String cabinNumberData) {
+    public static int numbers = 0;
+    public static String searchSurvived(ArrayList<Passenger> passengers, int classNumber, String genderData, String wentOnDeck,
+                                        Integer passengerNumberMinData, Integer passengerNumberMaxData, String passengerNameData,
+                                        Integer parchAmountData, Integer sibSPAmountData, String ticketNumberData, Float maxTicketPriceData,
+                                        Float minTicketPriceData, String cabinNumberData) throws IOException {
 
         ArrayList<Passenger> filteredPassengers = new ArrayList<Passenger>();
         for (int i = 0; i < passengers.size(); i++) {
@@ -20,9 +22,29 @@ public class Utils {
                 filteredPassengers.add(passengers.get(i));
             }
         }
-        System.out.println(filteredPassengers);
-        System.out.println(filteredPassengers.size());
+
+        int survived = 0;
+        int died = 0;
+        for (int i = 0; i < filteredPassengers.size(); i++) {
+            if (filteredPassengers.get(i).survived()) {
+                survived++;
+            } else {
+                died++;
+            }
+        }
+        numbers++;
+        String fileName = String.valueOf(numbers);
+        File file = new File(fileName + ".csv");
+
+        PrintWriter printWriter = new PrintWriter(file);
+        for (int i = 0; i < filteredPassengers.size(); i++) {
+            printWriter.println(filteredPassengers.get(i).toString());
+        }
+        printWriter.close();
+        return "Total rows: " + filteredPassengers.size() + " (" + survived + ") survived, " + died + " did not)";
     }
 
-
 }
+
+
+
