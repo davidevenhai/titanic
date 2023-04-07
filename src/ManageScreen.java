@@ -10,6 +10,7 @@ public class ManageScreen extends JPanel {
     private JComboBox<String> survivedComboBoxGender;
     private JComboBox<String> survivedComboBoxEmbarked;
     public ArrayList<Passenger> passengers = new ArrayList<Passenger>();
+    public Statistic statisticArray;
 
     public ArrayList<String> values;
     private String cabinNumberData;
@@ -32,7 +33,38 @@ public class ManageScreen extends JPanel {
 
     private Image backGround;
 
-    public String ReadData(File file) {
+//    public String readData(File file) {
+//        String data;
+//        String firstLine;
+//        try {
+//            BufferedReader bufferedReader = new BufferedReader(new FileReader(Constants.PATH_TO_DATA_FILE));
+//            firstLine = bufferedReader.readLine();
+//            while ((data = bufferedReader.readLine()) != null) {
+//                String[] values = data.split(",");
+//                Passenger passenger = null;
+//                if (values.length == 13) {
+//                    passenger = new Passenger(Integer.parseInt(values[0]), Integer.parseInt(values[1]),
+//                            Integer.parseInt(values[2]), (values[3] + ", " + values[4]), values[5],
+//                            values[6], Integer.parseInt(values[7]), Integer.parseInt(values[8]),
+//                            values[9], Float.parseFloat(values[10]), values[11],
+//                            values[12] + " ");
+//                } else if (values.length == 12) {
+//                    passenger = new Passenger(Integer.parseInt(values[0]), Integer.parseInt(values[1]),
+//                            Integer.parseInt(values[2]), (values[3] + ", " + values[4]), values[5],
+//                            values[6], Integer.parseInt(values[7]), Integer.parseInt(values[8]), values[9],
+//                            Float.parseFloat(values[10]), values[11], "");
+//                }
+//                passengers.add(passenger);
+//            }
+//            bufferedReader.close();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return firstLine;
+//    }
+
+
+    public String readData(File file) {
         String data;
         String firstLine;
         try {
@@ -40,33 +72,23 @@ public class ManageScreen extends JPanel {
             firstLine = bufferedReader.readLine();
             while ((data = bufferedReader.readLine()) != null) {
                 String[] values = data.split(",");
-                Passenger passenger = null;
-                if (values.length == 13) {
-                    passenger = new Passenger(Integer.parseInt(values[0]), Integer.parseInt(values[1]),
-                            Integer.parseInt(values[2]), (values[3] + ", " + values[4]), values[5],
-                            values[6], Integer.parseInt(values[7]), Integer.parseInt(values[8]),
-                            values[9], Float.parseFloat(values[10]), values[11],
-                            values[12] + " ");
-                } else if (values.length == 12) {
-                    passenger = new Passenger(Integer.parseInt(values[0]), Integer.parseInt(values[1]),
-                            Integer.parseInt(values[2]), (values[3] + ", " + values[4]), values[5],
-                            values[6], Integer.parseInt(values[7]), Integer.parseInt(values[8]), values[9],
-                            Float.parseFloat(values[10]), values[11], "");
-                }
+                Passenger passenger = new Passenger(values);
                 passengers.add(passenger);
             }
             bufferedReader.close();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return firstLine;
     }
 
+
     public ManageScreen(int x, int y, int width, int height) {
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
         // backGround = new ImageIcon("C:\\Users\\עומר\\Downloads\\תמונה טיטאניק.jpg").getImage();
         if (file.exists()) {
-            String firstLine = ReadData(file);
+            String firstLine = readData(file);
             this.setLayout(null);
             this.setBounds(x, y + Constants.MARGIN_FROM_TOP, width, height);
             JLabel survivedLabel = new JLabel("Passenger Class: ");
@@ -148,7 +170,6 @@ public class ManageScreen extends JPanel {
             sibSPAmountBox.setBounds(x + Constants.MARGIN_FROM_LEFT, 550, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
             this.add(sibSPAmountBox);
             sibSPAmountBox.addKeyListener(new KeyAdapter() {
-                @Override
                 public void keyReleased(KeyEvent e) {
                     try {
                         int value = Integer.parseInt(sibSPAmountBox.getText());
@@ -303,22 +324,29 @@ public class ManageScreen extends JPanel {
             });
 
             JButton filter = new JButton("Filter");
-            filter.setBounds(x + Constants.MARGIN_FROM_LEFT + 300, 550, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT + 20);
+            filter.setBounds(x + Constants.MARGIN_FROM_LEFT + 300, 550, Constants.LABEL_WIDTH , Constants.LABEL_HEIGHT + 20);
             filter.setFont(new Font("Filter", Font.ROMAN_BASELINE, 20));
             this.add(filter);
             filter.addActionListener(e -> {
 
                 try {
-                    showMessage(Utils.searchSurvived(passengers, this.classNumber, this.genderData, this.wentOnDeckData,
+                    showMessage(Utils.filterFunction(passengers, this.classNumber, this.genderData, this.wentOnDeckData,
                             this.passengerNumberMinData, this.passengerNumberMaxData,
                             passengerNameText.getText(), this.parchAmountData, this.sibSPAmountBoxData, ticketNumberBox.getText(),
-                            this.maxTicketPriceData, this.minTicketPriceData, cabinNumberBox.getText(),firstLine));
+                            this.maxTicketPriceData, this.minTicketPriceData, cabinNumberBox.getText(), firstLine));
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             });
+            JButton statistic = new JButton("Statistic");
+            statistic.setBounds(x + Constants.MARGIN_FROM_LEFT + 300, 450, Constants.LABEL_WIDTH , Constants.LABEL_HEIGHT + 20);
+            statistic.setFont(new Font("Statistic", Font.ROMAN_BASELINE, 20));
+            this.add(statistic);
+            statistic.addActionListener(e -> {
+
+            });
+            }
         }
-    }
 
     public void resetToDefault() {
         this.wentOnDeckData = Constants.EMBARKED[0];
