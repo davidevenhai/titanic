@@ -8,7 +8,7 @@ public class Utils {
     public static String searchSurvived(ArrayList<Passenger> passengers, int classNumber, String genderData, String wentOnDeck,
                                         Integer passengerNumberMinData, Integer passengerNumberMaxData, String passengerNameData,
                                         Integer parchAmountData, Integer sibSPAmountData, String ticketNumberData, Float maxTicketPriceData,
-                                        Float minTicketPriceData, String cabinNumberData) throws IOException {
+                                        Float minTicketPriceData, String cabinNumberData,String firstLine) throws IOException {
 
         ArrayList<Passenger> filteredPassengers = new ArrayList<Passenger>();
         for (int i = 0; i < passengers.size(); i++) {
@@ -37,6 +37,7 @@ public class Utils {
         File file = new File(fileName + ".csv");
 
         PrintWriter printWriter = new PrintWriter(file);
+        printWriter.println(firstLine);
         for (int i = 0; i < filteredPassengers.size(); i++) {
             printWriter.println(filteredPassengers.get(i).toString());
         }

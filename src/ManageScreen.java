@@ -32,11 +32,12 @@ public class ManageScreen extends JPanel {
 
     private Image backGround;
 
-    public void ReadData(File file) {
+    public String ReadData(File file) {
         String data;
+        String firstLine;
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(Constants.PATH_TO_DATA_FILE));
-            String firstLine = bufferedReader.readLine();
+            firstLine = bufferedReader.readLine();
             while ((data = bufferedReader.readLine()) != null) {
                 String[] values = data.split(",");
                 Passenger passenger = null;
@@ -58,13 +59,14 @@ public class ManageScreen extends JPanel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return firstLine;
     }
 
     public ManageScreen(int x, int y, int width, int height) {
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
         // backGround = new ImageIcon("C:\\Users\\עומר\\Downloads\\תמונה טיטאניק.jpg").getImage();
         if (file.exists()) {
-            ReadData(file);
+            String firstLine = ReadData(file);
             this.setLayout(null);
             this.setBounds(x, y + Constants.MARGIN_FROM_TOP, width, height);
             JLabel survivedLabel = new JLabel("Passenger Class: ");
@@ -310,7 +312,7 @@ public class ManageScreen extends JPanel {
                     showMessage(Utils.searchSurvived(passengers, this.classNumber, this.genderData, this.wentOnDeckData,
                             this.passengerNumberMinData, this.passengerNumberMaxData,
                             passengerNameText.getText(), this.parchAmountData, this.sibSPAmountBoxData, ticketNumberBox.getText(),
-                            this.maxTicketPriceData, this.minTicketPriceData, cabinNumberBox.getText()));
+                            this.maxTicketPriceData, this.minTicketPriceData, cabinNumberBox.getText(),firstLine));
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
