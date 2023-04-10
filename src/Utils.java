@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Utils {
 
-    public ArrayList<Statistic> statistic = new ArrayList<Statistic>();
+    //public ArrayList<Statistic> statistic = new ArrayList<Statistic>();
 
     public static int csvNumbers = 0;
 
@@ -56,7 +56,7 @@ public class Utils {
             printWriter.println(filteredPassengers.get(i).toString());
         }
         printWriter.close();
-        return "Total rows: " + filteredPassengers.size() + " (" + survived + ") survived, " + died + " did not)";
+        return "Total rows: " + filteredPassengers.size() + " (" + survived + " survived, " + died + " did not)";
     }
 
 

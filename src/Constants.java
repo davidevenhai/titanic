@@ -10,8 +10,8 @@ public class Constants {
     public static final int ZERO_VALUE = 0;
     public static final int DEFAULT_VALUE = -1;
     public static final String EMPTY_STRING = "";
-
-
+    public static final int[] PRICE = {0,10,11,30,31,Integer.MAX_VALUE};
+    public static final int[] AGES = {0,10,11,20,21,30,31,40,41,50,51,Integer.MAX_VALUE};
     public static final int MARGIN_FROM_TOP = 10;//זה הY שלנו
     public static final int MARGIN_FROM_LEFT = 5;//זה הX שלנו
     public static final int LABEL_WIDTH = 108;//זה העובי
