@@ -10,9 +10,6 @@ public class ManageScreen extends JPanel {
     private JComboBox<String> survivedComboBoxGender;
     private JComboBox<String> survivedComboBoxEmbarked;
     public ArrayList<Passenger> passengers = new ArrayList<Passenger>();
-    public Statistic statisticArray;
-
-    public ArrayList<String> values;
     private String cabinNumberData;
     private String genderData;
 
@@ -32,38 +29,6 @@ public class ManageScreen extends JPanel {
     private Float maxTicketPriceData;
 
     private Image backGround;
-
-//    public String readData(File file) {
-//        String data;
-//        String firstLine;
-//        try {
-//            BufferedReader bufferedReader = new BufferedReader(new FileReader(Constants.PATH_TO_DATA_FILE));
-//            firstLine = bufferedReader.readLine();
-//            while ((data = bufferedReader.readLine()) != null) {
-//                String[] values = data.split(",");
-//                Passenger passenger = null;
-//                if (values.length == 13) {
-//                    passenger = new Passenger(Integer.parseInt(values[0]), Integer.parseInt(values[1]),
-//                            Integer.parseInt(values[2]), (values[3] + ", " + values[4]), values[5],
-//                            values[6], Integer.parseInt(values[7]), Integer.parseInt(values[8]),
-//                            values[9], Float.parseFloat(values[10]), values[11],
-//                            values[12] + " ");
-//                } else if (values.length == 12) {
-//                    passenger = new Passenger(Integer.parseInt(values[0]), Integer.parseInt(values[1]),
-//                            Integer.parseInt(values[2]), (values[3] + ", " + values[4]), values[5],
-//                            values[6], Integer.parseInt(values[7]), Integer.parseInt(values[8]), values[9],
-//                            Float.parseFloat(values[10]), values[11], "");
-//                }
-//                passengers.add(passenger);
-//            }
-//            bufferedReader.close();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return firstLine;
-//    }
-
-
     public String readData(File file) {
         String data;
         String firstLine;
@@ -82,7 +47,6 @@ public class ManageScreen extends JPanel {
         }
         return firstLine;
     }
-
 
     public ManageScreen(int x, int y, int width, int height) {
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
@@ -330,7 +294,7 @@ public class ManageScreen extends JPanel {
             filter.addActionListener(e -> {
 
                 try {
-                    showMessage(Utils.filterFunction(passengers, this.classNumber, this.genderData, this.wentOnDeckData,
+                    showMessage(Utils.filterButton(passengers, this.classNumber, this.genderData, this.wentOnDeckData,
                             this.passengerNumberMinData, this.passengerNumberMaxData,
                             passengerNameText.getText(), this.parchAmountData, this.sibSPAmountBoxData, ticketNumberBox.getText(),
                             this.maxTicketPriceData, this.minTicketPriceData, cabinNumberBox.getText(), firstLine));
@@ -343,7 +307,11 @@ public class ManageScreen extends JPanel {
             statistic.setFont(new Font("Statistic", Font.ROMAN_BASELINE, 20));
             this.add(statistic);
             statistic.addActionListener(e -> {
-
+                try {
+                    Statistic statistic1 = new Statistic(passengers);
+                } catch (FileNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
             });
             }
         }

@@ -12,39 +12,11 @@ public class Passenger {
     private String cabin;
     private String embarked;
 
-//    public Passenger(int id, int survived, int pClass, String name, String gender, String age, int sibSp, int parch,
-//                     String ticket, float fare, String cabin, String embarked) {
-//        this.id = id;
-//        this.survived = survived;
-//        this.pClass = pClass;
-//        if (name != null) {
-//            this.name = getFormattedName(name);
-//        } else {
-//            this.name = "";
-//        }
-//        this.gender = gender;
-//        if (age.equals("")) {
-//            this.age = 0;
-//        } else {
-//            this.age = Float.parseFloat(age);
-//        }
-//        this.sibSp = sibSp;
-//        this.parch = parch;
-//        this.ticket = ticket;
-//        this.fare = fare;
-//        this.cabin = cabin;
-//        if (embarked == null) {
-//            this.embarked = " ";
-//        } else {
-//            this.embarked = embarked;
-//        }
-//    }
-
     public Passenger(String[] values) {
         this.id = checkIntNum(values[0]);
         this.survived = checkIntNum(values[1]);
         this.pClass = checkIntNum(values[2]);
-        this.name = getFormattedName(values[3] +", "+ values[4]);
+        this.name = getFormattedName(values[3] + ", " + values[4]);
         this.gender = values[5];
         this.age = checkFloat(values[6]);
         this.sibSp = checkIntNum(values[7]);
@@ -56,13 +28,6 @@ public class Passenger {
             this.embarked = values[12];
         }
 
-    }
-    public String getGender(){
-        return this.gender;
-    }
-
-    public float getAge() {
-        return age;
     }
 
     private int checkIntNum(String number) {
@@ -79,11 +44,6 @@ public class Passenger {
             check = Float.parseFloat(number);
         }
         return check;
-    }
-
-
-    public String getName() {
-        return name;
     }
 
     public boolean survived() {
@@ -173,10 +133,14 @@ public class Passenger {
     }
 
     public boolean validateEmbarked(String embarked) {
-        if (embarked.equals(Constants.EMBARKED[0])) {
-            return true;
-        } else {
-            return this.embarked.contains(embarked);
+        try {
+            if (embarked.equals(Constants.EMBARKED[0])) {
+                return true;
+            } else {
+                return this.embarked.contains(embarked);
+            }
+        } catch (NullPointerException exception) {
+            return false;
         }
     }
 
@@ -193,6 +157,26 @@ public class Passenger {
             return true;
         } else {
             return this.fare <= fare;
+        }
+    }
+
+    public boolean hadFamily() {
+        return this.parch > 0 || this.sibSp > 0;
+    }
+
+    public boolean ageInRange(int minAge, int maxAge) {
+        if (this.age >= minAge && this.age <= maxAge) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean costInRange(int minCost, int maxCost) {
+        if (this.fare >= minCost && this.fare <= maxCost) {
+            return true;
+        } else {
+            return false;
         }
     }
 

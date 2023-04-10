@@ -29,11 +29,11 @@ public class Utils {
     }
 
 
-    public static String filterFunction(ArrayList<Passenger> passengers, int classNumber, String genderData, String wentOnDeck,
-                                        Integer passengerNumberMinData, Integer passengerNumberMaxData, String passengerNameData,
-                                        Integer parchAmountData, Integer sibSPAmountData, String ticketNumberData, Float maxTicketPriceData,
-                                        Float minTicketPriceData, String cabinNumberData, String firstLine) throws IOException {
-        ArrayList<Passenger> filteredPassengers = new ArrayList<Passenger>();
+    public static String filterButton(ArrayList<Passenger> passengers, int classNumber, String genderData, String wentOnDeck,
+                                      Integer passengerNumberMinData, Integer passengerNumberMaxData, String passengerNameData,
+                                      Integer parchAmountData, Integer sibSPAmountData, String ticketNumberData, Float maxTicketPriceData,
+                                      Float minTicketPriceData, String cabinNumberData, String firstLine) throws IOException {
+        ArrayList<Passenger> filteredPassengers;
         filteredPassengers = searchSurvived(passengers, classNumber, genderData, wentOnDeck, passengerNumberMinData,
                 passengerNumberMaxData, passengerNameData, parchAmountData, sibSPAmountData, ticketNumberData, maxTicketPriceData,
                 minTicketPriceData, cabinNumberData, firstLine);
@@ -58,8 +58,6 @@ public class Utils {
         printWriter.close();
         return "Total rows: " + filteredPassengers.size() + " (" + survived + ") survived, " + died + " did not)";
     }
-
-
 
 
 }
