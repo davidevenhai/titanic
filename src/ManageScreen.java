@@ -1,9 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ManageScreen extends JPanel {
     private JComboBox<String> survivedComboBox;
@@ -28,7 +30,8 @@ public class ManageScreen extends JPanel {
     ;
     private Float maxTicketPriceData;
 
-    private Image backGround;
+    private Image backgroundImage;
+
     public String readData(File file) {
         String data;
         String firstLine;
@@ -51,6 +54,11 @@ public class ManageScreen extends JPanel {
     public ManageScreen(int x, int y, int width, int height) {
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
         // backGround = new ImageIcon("C:\\Users\\עומר\\Downloads\\תמונה טיטאניק.jpg").getImage();
+        try {
+            backgroundImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/data/titanicIdeaPhoto.jpg")));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         if (file.exists()) {
             String firstLine = readData(file);
             this.setLayout(null);
@@ -103,15 +111,15 @@ public class ManageScreen extends JPanel {
             });
 
             JLabel passengerName = new JLabel("Passenger name");
-            passengerName.setBounds(x + Constants.MARGIN_FROM_LEFT, 160, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
+            passengerName.setBounds(x + Constants.MARGIN_FROM_LEFT, 160, Constants.LABEL_WIDTH , Constants.LABEL_HEIGHT);
             this.add(passengerName);
 
             TextField passengerNameText = new TextField("");
-            passengerNameText.setBounds(x + Constants.MARGIN_FROM_LEFT, 200, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
+            passengerNameText.setBounds(x + Constants.MARGIN_FROM_LEFT, 200, Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
             this.add(passengerNameText);
 
             JLabel ticketNumber = new JLabel("Ticket Number");
-            ticketNumber.setBounds(x + Constants.MARGIN_FROM_LEFT, 300, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
+            ticketNumber.setBounds(x + Constants.MARGIN_FROM_LEFT, 300, Constants.LABEL_WIDTH , Constants.LABEL_HEIGHT);
             this.add(ticketNumber);
 
             TextField ticketNumberBox = new TextField("");
@@ -336,9 +344,9 @@ public class ManageScreen extends JPanel {
         JOptionPane.showMessageDialog(this, message, "Filter", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {
         super.paintComponents(g);
-        g.drawImage(backGround, 0, 0, null);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 }
 

@@ -17,9 +17,9 @@ public class Statistic {
         printWriter.close();
     }
     private String byEmbarked(ArrayList<Passenger> passengers){
-        float alive = 0, total = 0;
         String conclusion = "Total survived from embarked: ";
         for(int i = 1; i< Constants.EMBARKED.length; i++){
+            float alive = 0, total = 0;
             for(Passenger p : passengers){
                 if(p.validateEmbarked(Constants.EMBARKED[i])) {
                     total++;
@@ -33,9 +33,9 @@ public class Statistic {
         return conclusion;
     }
     private String byPrice(ArrayList<Passenger> passengers){
-        float alive = 0, total = 0;
         String conclusion = "Total survived per price: ";
         for(int i = 0; i< Constants.PRICE.length-1; i+=2){
+            float alive = 0, total = 0;
             for(Passenger p : passengers){
                 if(p.costInRange(Constants.PRICE[i], Constants.PRICE[i+1])) {
                     total++;
@@ -74,10 +74,9 @@ public class Statistic {
     }
 
     private String byAge(ArrayList<Passenger> passenger){
-        float alive = 0;
-        float total = 0;
         String calculated = "Survived by age ";
         for(int i = 0;i<=Constants.AGES.length-1;i+=2){
+            float alive = 0,total = 0;
             int minAge = Constants.AGES[i];
             int maxAge = Constants.AGES[i+1];
             for(Passenger p : passenger){
