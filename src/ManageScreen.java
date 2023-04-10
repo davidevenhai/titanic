@@ -333,7 +333,7 @@ public class ManageScreen extends JPanel {
     }
 
     public void showMessage(String message) {
-        JOptionPane.showMessageDialog(this, message, "Message", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, message, "Filter", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void paintComponent(Graphics g) {

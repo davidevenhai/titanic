@@ -4,17 +4,13 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Utils {
-
-    //public ArrayList<Statistic> statistic = new ArrayList<Statistic>();
-
     public static int csvNumbers = 0;
-
     public static ArrayList<Passenger> searchSurvived(ArrayList<Passenger> passengers, int classNumber, String genderData, String wentOnDeck,
                                                       Integer passengerNumberMinData, Integer passengerNumberMaxData, String passengerNameData,
                                                       Integer parchAmountData, Integer sibSPAmountData, String ticketNumberData, Float maxTicketPriceData,
                                                       Float minTicketPriceData, String cabinNumberData, String firstLine) throws IOException {
 
-        ArrayList<Passenger> filteredPassengers = new ArrayList<Passenger>();
+        ArrayList<Passenger> filteredPassengers = new ArrayList<>();
         for (int i = 0; i < passengers.size(); i++) {
             if (passengers.get(i).validatePClass(classNumber) && passengers.get(i).validateGender(genderData) && passengers.get(i).validateEmbarked(wentOnDeck)
                     && passengers.get(i).validateMinId(passengerNumberMinData) && passengers.get(i).validateMaxId(passengerNumberMaxData)
@@ -27,8 +23,6 @@ public class Utils {
         }
         return filteredPassengers;
     }
-
-
     public static String filterButton(ArrayList<Passenger> passengers, int classNumber, String genderData, String wentOnDeck,
                                       Integer passengerNumberMinData, Integer passengerNumberMaxData, String passengerNameData,
                                       Integer parchAmountData, Integer sibSPAmountData, String ticketNumberData, Float maxTicketPriceData,
@@ -58,8 +52,6 @@ public class Utils {
         printWriter.close();
         return "Total rows: " + filteredPassengers.size() + " (" + survived + " survived, " + died + " did not)";
     }
-
-
 }
 
 
