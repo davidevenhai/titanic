@@ -6,15 +6,31 @@ import java.util.ArrayList;
 public class Statistic {
     private static int txtNumbers = 0;
     public Statistic(ArrayList<Passenger> passengers) throws FileNotFoundException {
-        String toWrite = ( byEmbarked(passengers)+"\n"+byAge(passengers)+"\n" +
-                byGender(passengers)+"\n"+bySibParch(passengers)+"\n"+byPrice(passengers));
+        String toWrite = (byEmbarked(passengers)+"\n"+byAge(passengers)+"\n" +
+                byGender(passengers)+"\n"+bySibParch(passengers)+"\n"+byPrice(passengers)+"\n" +
+                byClass(passengers));
         txtNumbers++;
         String fileName = String.valueOf(txtNumbers);
         File file = new File(fileName + ".txt");
-
         PrintWriter printWriter = new PrintWriter(file);
         printWriter.println(toWrite);
         printWriter.close();
+    }
+    private String byClass(ArrayList<Passenger> passengers){
+        String conclusion = "Total survived per class: ";
+        for(int i = 1; i< Constants.PASSENGER_CLASS_OPTIONS.length; i++){
+            float alive = 0, total = 0;
+            for(Passenger p : passengers){
+                if(p.validatePClass(i)) {
+                    total++;
+                    if(p.survived()){
+                        alive++;
+                    }
+                }
+            }
+            conclusion+=Constants.PASSENGER_CLASS_OPTIONS[i]+" ---> "+String.format("%.2f", (alive/total)*100)+"%. ";
+        }
+        return conclusion;
     }
     private String byEmbarked(ArrayList<Passenger> passengers){
         String conclusion = "Total survived from embarked: ";
@@ -89,8 +105,8 @@ public class Statistic {
             }
             String formattedDot = String.format("%.2f", (alive/total)*100);
             calculated+= minAge+"-"+maxAge+" ---> "+formattedDot+"%. ";
-            if(maxAge == Integer.MAX_VALUE){
-                calculated = calculated.replaceAll("-2147483647", "+");
+            if(maxAge == Constants.AGES[Constants.AGES.length-1]){
+                calculated = calculated.replaceAll("-"+String.valueOf(Constants.AGES[Constants.AGES.length-1]), "+");
             }
         }
         return calculated;

@@ -134,7 +134,7 @@ public class ManageScreen extends JPanel {
             cabinNumberBox.setBounds(x + Constants.MARGIN_FROM_LEFT + 650, y, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
             this.add(cabinNumberBox);
 
-            JLabel sibSPAmount = new JLabel("Sibilings/Spouse");
+            JLabel sibSPAmount = new JLabel("Siblings/Spouse");
             sibSPAmount.setBounds(x + Constants.MARGIN_FROM_LEFT, 500, Constants.LABEL_WIDTH / 2 + 50, Constants.LABEL_HEIGHT);
             this.add(sibSPAmount);
 
@@ -155,9 +155,6 @@ public class ManageScreen extends JPanel {
                     } catch (NumberFormatException exception) {
                         sibSPAmountBox.setText("");
                         sibSPAmountBoxData = Constants.DEFAULT_VALUE;
-                        if (!sibSPAmountBox.getText().equals("")) {
-                            showMessage("Please enter a valid number");
-                        }
                     }
                 }
             });
@@ -274,7 +271,6 @@ public class ManageScreen extends JPanel {
             parchAmountBox.setBounds(x + Constants.MARGIN_FROM_LEFT, 450, Constants.LABEL_WIDTH / 2, Constants.LABEL_HEIGHT);
             this.add(parchAmountBox);
 
-
             parchAmountBox.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyReleased(KeyEvent e) {
@@ -300,7 +296,6 @@ public class ManageScreen extends JPanel {
             filter.setFont(new Font("Filter", Font.ROMAN_BASELINE, 20));
             this.add(filter);
             filter.addActionListener(e -> {
-
                 try {
                     showMessage(Utils.filterButton(passengers, this.classNumber, this.genderData, this.wentOnDeckData,
                             this.passengerNumberMinData, this.passengerNumberMaxData,
